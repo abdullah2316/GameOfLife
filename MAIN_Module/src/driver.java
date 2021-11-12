@@ -8,11 +8,11 @@ public class driver {
         System.out.println("Hello world");
         //test obj;
         //db connction established
-      DBdutiesImpl dbobj=new DBdutiesImpl();
-      dbobj.connect();
+      //DBdutiesImpl dbobj=new DBdutiesImpl();
+      //dbobj.connect();
       //String output= dbobj.load();
        //System.out.println(output+" from main");
-       // Application.launch(MainMenu.class, args);
+        //Application.launch(MainMenu.class, args);
     }
     public String getDBobj()
     {

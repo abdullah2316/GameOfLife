@@ -11,6 +11,9 @@
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
   </padding>
 
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
+  <Label fx:id="title"/>
+  <Button fx:id="new_state" text="New State" />
+  <Button fx:id="load_state" text="Load State" onMouseClicked="#switch_to_SavedStates"/>
+  <Button fx:id="rules" text="Rules"/>
+  <Button fx:id="exit" text="EXIT"/>
 </VBox>
