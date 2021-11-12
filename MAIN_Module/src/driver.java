@@ -7,6 +7,7 @@ public class driver {
     public static void main(String[] args) {
         System.out.println("Hello world");
         //test obj;
+        //db connction established
       DBdutiesImpl dbobj=new DBdutiesImpl();
       dbobj.connect();
       //String output= dbobj.load();
