@@ -1,1 +1,1 @@
-# GameOfLife group project sda
+# GameOfLife Group Project SDA
