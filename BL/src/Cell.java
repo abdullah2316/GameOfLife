@@ -1,12 +1,13 @@
 public class Cell {
-    private int Row;
-    private int Column;
     private boolean isAlive;
 
-    public Cell(int r, int c, boolean alive)
+    public Cell()
     {
-        Row = r;
-        Column = c;
+        isAlive = false;
+    }
+
+    public Cell(boolean alive)
+    {
         isAlive = alive;
     }
 
@@ -18,10 +19,5 @@ public class Cell {
     public void ChangeState()
     {
         isAlive = !isAlive;
-    }
-
-    public boolean isNeighbour(Cell otherCell)
-    {
-        return ((Row == otherCell.Row + 1 || Row == otherCell.Row - 1) && (Column == otherCell.Column + 1 || Column == otherCell.Column + 1));
     }
 }
