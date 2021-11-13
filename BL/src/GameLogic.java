@@ -1,5 +1,6 @@
 public class GameLogic {
     private GameBoard Board;
+    private boolean State;
     private int Zoom_Factor;
     private int Counter;
     private int Speed;
@@ -15,7 +16,7 @@ public class GameLogic {
         Board = new GameBoard();
     }
     public void displayBoard(){
-
+        Board.displayBoard();
     }
     public void SaveState(){
 
@@ -41,8 +42,10 @@ public class GameLogic {
         Board.ResetBoard();
     }
     public void Start(){
+        State = true;
     }
     public void Stop(){
+        State = false;
     }
     public void Reset(){
         Zoom_Factor = 1;
