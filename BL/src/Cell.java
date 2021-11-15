@@ -1,3 +1,5 @@
+package com.company;
+
 public class Cell {
     private boolean isAlive;
 
@@ -19,5 +21,9 @@ public class Cell {
     public void ChangeState()
     {
         isAlive = !isAlive;
+    }
+    public void setAlive(boolean val)
+    {
+        isAlive = val;
     }
 }
