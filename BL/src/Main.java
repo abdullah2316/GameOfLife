@@ -1,8 +1,7 @@
-package com.company;
 import java.io.IOException;
+import java.awt.AWTException;
 
 public class Main {
-
     public static void main(String[] args) throws InterruptedException {
         // write your code here
         int i = 0;
@@ -17,10 +16,8 @@ public class Main {
             System.out.println();
             object.displayBoard();
             Thread.sleep(1000);
-            i++;
             clearScreen();
         }
-
     }
     public static void clearScreen() throws InterruptedException {
         System.out.println(System.lineSeparator().repeat(100));
