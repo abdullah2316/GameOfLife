@@ -1,3 +1,5 @@
+package com.company;
+
 public class GameBoard {
     private Cell[][] Cells;
     int Size;
@@ -10,10 +12,11 @@ public class GameBoard {
                 Cells[i][j] = new Cell();
             }
         }
-        Cells[5][5].ChangeState();
-        Cells[5][4].ChangeState();
+        Cells[2][4].ChangeState();
+        Cells[3][4].ChangeState();
         Cells[4][4].ChangeState();
-        Cells[4][5].ChangeState();
+        Cells[3][5].ChangeState();
+        Cells[3][3].ChangeState();
     }
     public GameBoard(int size){
         Size = size;
@@ -24,9 +27,9 @@ public class GameBoard {
         for(int i=0; i < 10 ; i++){
             for(int j=0; j < 10 ; j++){
                 if (Cells[i][j].check_IsAlive())
-                    System.out.print(" . ");
+                    System.out.print(" 0 ");
                 else
-                    System.out.print(" O ");
+                    System.out.print(" . ");
             }
             System.out.println();
         }
@@ -45,7 +48,46 @@ public class GameBoard {
         return Cells[row][column].check_IsAlive();
     }
     public int Size (){
-        return Cells.length;
+        return Size;
+    }
+    public int check_neighbor(int row, int col)
+    {
+        int count = 0;
+        if (Cells[row-1][col].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row+1][col].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row][col-1].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row][col+1].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row-1][col-1].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row-1][col+1].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row+1][col-1].check_IsAlive() == true){
+            count++;
+        }
+        if (Cells[row+1][col+1].check_IsAlive() == true){
+            count++;
+        }
+
+        return count;
+    }
+    public void copy (GameBoard obj)
+    {
+        for (int i=0; i< Size; i++)
+        {
+            for(int j=0; j< Size; j++)
+            {
+                Cells[i][j].setAlive(obj.Cells[i][j].check_IsAlive());
+            }
+        }
     }
 }
-
