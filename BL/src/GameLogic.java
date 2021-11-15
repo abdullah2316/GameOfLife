@@ -1,5 +1,8 @@
+package com.company;
+
 public class GameLogic {
     private GameBoard Board;
+    private GameBoard NewBoard;
     private boolean State;
     private int Zoom_Factor;
     private int Counter;
@@ -14,6 +17,7 @@ public class GameLogic {
     }
     public void ConstructBoard(){
         Board = new GameBoard();
+        NewBoard = new GameBoard();
     }
     public void displayBoard(){
         Board.displayBoard();
@@ -22,6 +26,24 @@ public class GameLogic {
 
     }
     public void updateBoard(){
+        int return_count = 0;
+        //System.out.print(Board.check_neighbor(2,4));
+        for(int i = 1; i < Board.Size() -1; i++)
+        {
+            for(int j = 1 ; j < Board.Size() -1; j++)
+            {
+                return_count = Board.check_neighbor(i, j);
+                if ((return_count == 3) && Board.isAlive(i,j) == false )
+                {
+                    NewBoard.isClicked(i,j);
+                }
+                else if( (return_count < 2 || return_count > 3) && Board.isAlive(i , j) == true )
+                {
+                    NewBoard.isClicked(i,j);
+                }
+            }
+        }
+        Board.copy(NewBoard);
 
     }
     public void updateCounter(int counter){
