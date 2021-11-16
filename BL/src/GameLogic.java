@@ -22,30 +22,34 @@ public class GameLogic {
     public void displayBoard(){
         Board.displayBoard();
     }
+    
     public void SaveState(){
 
     }
+    
     public void updateBoard(){
-        int return_count = 0;
-        //System.out.print(Board.check_neighbor(2,4));
-        for(int i = 1; i < Board.Size() ; i++)
+        GameBoard temp = new GameBoard(Board.getSize());
+        temp.copy(Board);
+
+        int size = Board.getSize();
+        for(int i = 0 ; i < size ; i++)
         {
-            for(int j = 1 ; j < Board.Size() ; j++)
+            for(int j = 0 ; j < size ; j++)
             {
-                return_count = Board.check_neighbor(i, j);
-                if ((return_count == 3) && Board.isAlive(i,j) == false )
+                int Neighbor_Count = Board.check_neighbor(i, j);
+                if (( Neighbor_Count == 3) &&! Board.isAlive(i, j))
                 {
-                    NewBoard.isClicked(i,j);
+                    temp.isClicked(i,j);
                 }
-                else if( (return_count < 2 || return_count > 3) && Board.isAlive(i , j) == true )
+                else if(( Neighbor_Count < 2 || Neighbor_Count > 3) && Board.isAlive(i, j))
                 {
-                    NewBoard.isClicked(i,j);
+                    temp.isClicked(i,j);
                 }
             }
         }
-        Board.copy(NewBoard);
-
+        Board.copy(temp);
     }
+    
     public void updateCounter(int counter){
         Counter = counter;
     }
