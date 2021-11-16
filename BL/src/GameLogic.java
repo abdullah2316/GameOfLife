@@ -1,5 +1,8 @@
+package com.company;
+
 public class GameLogic {
     private GameBoard Board;
+    private GameBoard NewBoard;
     private boolean State;
     private int Zoom_Factor;
     private int Counter;
@@ -14,6 +17,7 @@ public class GameLogic {
     }
     public void ConstructBoard(){
         Board = new GameBoard();
+        NewBoard = new GameBoard();
     }
     public void displayBoard(){
         Board.displayBoard();
@@ -22,27 +26,26 @@ public class GameLogic {
 
     }
     public void updateBoard(){
-        GameBoard temp = new GameBoard(Board.getSize());
-        temp.copy(Board);
-
-        for(int i = 0 ; i < Board.getSize() ; i++)
+        int return_count = 0;
+        //System.out.print(Board.check_neighbor(2,4));
+        for(int i = 1; i < Board.Size() ; i++)
         {
-            for(int j = 0 ; j < Board.getSize() ; j++)
+            for(int j = 1 ; j < Board.Size() ; j++)
             {
-                int Neighbor_Count = Board.check_neighbor(i, j);
-                if (( Neighbor_Count == 3) &&! Board.isAlive(i, j))
+                return_count = Board.check_neighbor(i, j);
+                if ((return_count == 3) && Board.isAlive(i,j) == false )
                 {
-                    temp.isClicked(i,j);
+                    NewBoard.isClicked(i,j);
                 }
-                else if(( Neighbor_Count < 2 || Neighbor_Count > 3) && Board.isAlive(i, j))
+                else if( (return_count < 2 || return_count > 3) && Board.isAlive(i , j) == true )
                 {
-                    temp.isClicked(i,j);
+                    NewBoard.isClicked(i,j);
                 }
             }
         }
-        Board.copy(temp);
-    }
+        Board.copy(NewBoard);
 
+    }
     public void updateCounter(int counter){
         Counter = counter;
     }
