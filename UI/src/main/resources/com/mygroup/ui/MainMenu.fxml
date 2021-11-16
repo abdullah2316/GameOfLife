@@ -5,15 +5,22 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
+<VBox alignment="TOP_LEFT" fx:id="layout"  xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.mygroup.ui.MainMenuController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
 
-  <Label fx:id="title"/>
-  <Button fx:id="new_state" text="New State" />
-  <Button fx:id="load_state" text="Load State" onMouseClicked="#switch_to_SavedStates"/>
-  <Button fx:id="rules" text="Rules"/>
-  <Button fx:id="exit" text="EXIT"/>
+  <Pane fx:id="header">
+    <Label fx:id="temp" text="hellloooo" visible="false"/>
+    <ImageView fx:id="img"/>
+
+  </Pane>
+
+  <VBox fx:id="menu" alignment="BASELINE_CENTER" spacing="10.0" >
+  <Button fx:id="new_state" text="New State" minWidth="250" />
+  <Button fx:id="load_state" text="Load State" minWidth="250" onMouseClicked="#switch_to_SavedStates"/>
+    <Button fx:id="View_States" text="View States" minWidth="250"/>
+    <Button fx:id="Delete_state" text="Delete State " minWidth="250"/>
+  <Button fx:id="exit" text="EXIT" minWidth="250"/>
+  </VBox>
 </VBox>

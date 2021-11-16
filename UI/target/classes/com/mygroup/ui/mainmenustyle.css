@@ -1,4 +1,20 @@
 .button
 {
-  -fx-background-color: red
+
+  -fx-background-color:#2a4e97;
+  -fx-width:250px;
+  -fx-text-fill:white;
+   -fx-border: 5px ;
+   -fx-border-radius: 20px;
+   -fx-font-size:25px
+}
+#header
+{
+-fx-background-color: linear-gradient(mediumblue, skyblue);
+-fx-border-bottom: 5px ;
+-fx-border-color:mediumblue
+}
+#layout
+{
+-fx-background-color:  lightgray ;
 }

@@ -21,6 +21,8 @@ public class MainMenu extends Application {
         Set_StyleSheet(scene, "mainmenustyle.css");
         stage.setTitle("GAME OF LIFE");
         stage.setScene(scene);
+      stage.setMaximized(true);
+        stage.setResizable(false);
         stage.show();
     }
     public void Set_StyleSheet(Scene scene, String StyleSheet) {
