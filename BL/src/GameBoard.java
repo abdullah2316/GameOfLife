@@ -54,38 +54,22 @@ public class GameBoard {
     public int Size (){
         return Size;
     }
-    public int check_neighbor(int row, int col)
-    {
+    
+    public int check_neighbor(int row, int col) {
         int count = 0;
-        if (row > 0 && row < Size - 1 && col > 0 && col < Size - 1) {
-            if (Cells[row - 1][col].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row + 1][col].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row][col - 1].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row][col + 1].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row - 1][col - 1].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row - 1][col + 1].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row + 1][col - 1].check_IsAlive() == true) {
-                count++;
-            }
-            if (Cells[row + 1][col + 1].check_IsAlive() == true) {
-                count++;
-            }
-        }
+        
+        if (row > 0)                            if (Cells[row - 1][col].check_IsAlive()) count++;
+        if (row > 0 && col > 0)                 if (Cells[row - 1][col - 1].check_IsAlive()) count++;
+        if (row > 0 && col < Size - 1)          if (Cells[row - 1][col + 1].check_IsAlive()) count++;
+        if (row < Size - 1)                     if (Cells[row + 1][col].check_IsAlive()) count++;
+        if (row < Size - 1 && col > 0)          if (Cells[row + 1][col - 1].check_IsAlive()) count++;
+        if (row < Size - 1 && col < Size - 1)   if (Cells[row + 1][col + 1].check_IsAlive()) count++;
+        if (row < Size - 1 && col > 0)   if (Cells[row][col - 1].check_IsAlive()) count++;
+        if (col < Size - 1)                     if (Cells[row][col + 1].check_IsAlive()) count++;
 
         return count;
     }
+    
     public void copy (GameBoard obj)
     {
         for (int i=0; i< Size; i++)
