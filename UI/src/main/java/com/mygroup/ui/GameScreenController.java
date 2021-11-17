@@ -67,6 +67,7 @@ public class GameScreenController {
 
         scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroller.setPrefViewportHeight(400);
         //setting zoom functionality
         zoombar.setMax(2);
         zoombar.setMin(0.5);
