@@ -1,0 +1,15 @@
+#header
+{
+-fx-background-color: linear-gradient(mediumblue, skyblue);
+-fx-border-bottom: 5px ;
+-fx-border-color:mediumblue;
+}
+#layout
+{
+-fx-background-color:  lightgray ;
+}
+#scroller
+{
+-fx-padding: 0;
+    -fx-background-insets: 0;
+}

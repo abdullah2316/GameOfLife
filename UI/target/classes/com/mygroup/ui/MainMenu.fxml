@@ -17,9 +17,9 @@
   </Pane>
 
   <VBox fx:id="menu" alignment="BASELINE_CENTER" spacing="10.0" >
-  <Button fx:id="new_state" text="New State" minWidth="250" />
+  <Button fx:id="new_state" text="New State" minWidth="250"  onMouseClicked="#switch_to_gamescreen"/>
   <Button fx:id="load_state" text="Load State" minWidth="250" onMouseClicked="#switch_to_SavedStates"/>
-    <Button fx:id="View_States" text="View States" minWidth="250"/>
+    <Button fx:id="View_States" text="View States" minWidth="250" onMouseClicked="#switch_to_SavedStates"/>
     <Button fx:id="Delete_state" text="Delete State " minWidth="250"/>
   <Button fx:id="exit" text="EXIT" minWidth="250"/>
   </VBox>

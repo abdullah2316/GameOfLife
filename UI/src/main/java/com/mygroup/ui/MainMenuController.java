@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 public class MainMenuController {
     @FXML
-    public Label title;
+
     public Button new_state;
     public Button load_state;
     public Button exit;
@@ -33,52 +34,48 @@ public class MainMenuController {
     {
         Image image_header,image_loadstate,image_newstate,image_viewstate,image_deletestate,image_exit;
         //setting header image
-        image_header=new Image(Objects.requireNonNull(this.getClass().getResource("header.png")).toString());
+        image_header=new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
         img.setImage(image_header);
         //setting button icons
         //load
-        image_loadstate=new Image(Objects.requireNonNull(this.getClass().getResource("cloud.png")).toString());
+        image_loadstate=new Image(Objects.requireNonNull(this.getClass().getResource("images/cloud.png")).toString());
       ImageView image_load_state_view=new ImageView(image_loadstate);
         image_load_state_view.setFitHeight(25);
         image_load_state_view.setPreserveRatio(true);
       load_state.setGraphic(image_load_state_view);
       //new state
-        image_newstate=new Image(Objects.requireNonNull(this.getClass().getResource("plus.png")).toString());
+        image_newstate=new Image(Objects.requireNonNull(this.getClass().getResource("images/plus.png")).toString());
         ImageView image_new_state_view=new ImageView(image_newstate);
         image_new_state_view.setFitHeight(25);
         image_new_state_view.setPreserveRatio(true);
         new_state.setGraphic(image_new_state_view);
         //view state
-        image_viewstate=new Image(Objects.requireNonNull(this.getClass().getResource("eye.png")).toString());
+        image_viewstate=new Image(Objects.requireNonNull(this.getClass().getResource("images/eye.png")).toString());
         ImageView image_view_state_view=new ImageView(image_viewstate);
         image_view_state_view.setFitHeight(25);
         image_view_state_view.setPreserveRatio(true);
         View_States.setGraphic(image_view_state_view);
         //delete state
-        image_deletestate=new Image(Objects.requireNonNull(this.getClass().getResource("delete.png")).toString());
+        image_deletestate=new Image(Objects.requireNonNull(this.getClass().getResource("images/delete.png")).toString());
         ImageView image_delete_state_view=new ImageView(image_deletestate);
         image_delete_state_view.setFitHeight(25);
         image_delete_state_view.setPreserveRatio(true);
         Delete_state.setGraphic(image_delete_state_view);
         //EXIT
-        image_exit=new Image(Objects.requireNonNull(this.getClass().getResource("exit.png")).toString());
+        image_exit=new Image(Objects.requireNonNull(this.getClass().getResource("images/exit.png")).toString());
         ImageView image_exit_view=new ImageView(image_exit);
         image_exit_view.setFitHeight(25);
         image_exit_view.setPreserveRatio(true);
         exit.setGraphic(image_exit_view);
         //setting up background image
-//        Image background=new Image(Objects.requireNonNull(this.getClass().getResource("mainmenubackground.jpg")).toString());
-//        BackgroundImage myBI= new BackgroundImage(background,
-//        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-//        BackgroundSize.DEFAULT);
-        menu.setMinHeight(625);
+        menu.setMinHeight(590);
         menu.setBackground( new Background(
                 Collections.singletonList(new BackgroundFill(
                         Color.WHITE,
                         new CornerRadii(0),
                         new Insets(0))),
                 Collections.singletonList(new BackgroundImage(
-                        new Image(Objects.requireNonNull(this.getClass().getResource("mainmenubackground.jpg")).toString(), 100, 100, false, true),
+                        new Image(Objects.requireNonNull(this.getClass().getResource("images/mainmenubackground.jpg")).toString(), 100, 100, false, true),
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.DEFAULT,
@@ -93,7 +90,17 @@ public class MainMenuController {
         Scene scene = stageTheLayoutBelongs.getScene();
         obj.change_scene(stageTheLayoutBelongs, scene, "SavedStates.fxml", true, "SavedStates.css");
     }
-    //protected void onHelloButtonClick() {
-      //  welcomeText.setText("Welcome to JavaFX Application!");
-    //}
+
+    public void switch_to_gamescreen() throws Exception {
+        MainMenu obj = new MainMenu();
+        Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
+        Scene scene = stageTheLayoutBelongs.getScene();
+        obj.change_scene(stageTheLayoutBelongs, scene, "Gamescreen.fxml", true, "GameScreen.css");
+    }
+    public void switch_to_savedStates() throws Exception {
+        MainMenu obj = new MainMenu();
+        Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
+        Scene scene = stageTheLayoutBelongs.getScene();
+        obj.change_scene(stageTheLayoutBelongs, scene, "SavedStates.fxml", true, "SavedStates.css");
+    }
 }

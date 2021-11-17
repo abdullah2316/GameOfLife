@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mygroup.ui.GameScreen"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.Slider?>
+<VBox fx:id="vb" style="-fx-background-color: #6f6f6f;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mygroup.ui.GameScreenController">
+    <Pane fx:id="header">
+        <Label fx:id="temp" text="hellloooo" visible="false" />
+        <ImageView fx:id="img" />
+    </Pane>
+    <BorderPane fx:id="grid_ext" style="-fx-background-color: #404040; -fx-padding: 13px;">
+      <center>
+          <ScrollPane fx:id="scroller">
+         <Pane fx:id="grid_internal"  prefHeight="400.0"  style="-fx-background-color: #404040;" BorderPane.alignment="CENTER" />
+          </ScrollPane>
+      </center></BorderPane>
+    <Slider fx:id="zoombar"/>
+</VBox>
