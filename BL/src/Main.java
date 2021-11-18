@@ -2,20 +2,20 @@ import java.io.IOException;
 import java.awt.AWTException;
 
  public class Main {
-     public   DBdutiesImpl dbobj=new DBdutiesImpl();
-     public static void main(String[] args) {
-         System.out.println("Hello world");
-         test obj;
+     //public   DBdutiesImpl dbobj=new DBdutiesImpl();
+     //public static void main(String[] args) {
+       //  System.out.println("Hello world");
+        // test obj;
          //db connction established
-         DBdutiesImpl dbobj=new DBdutiesImpl();
-         dbobj.connect();
-         String output= dbobj.load();
-         System.out.println(output +" from main");
-     }
-    public String getDboj(){
-         return dbobj.load();
-    }
-    /*public static void main(String[] args) throws InterruptedException {
+        // DBdutiesImpl dbobj=new DBdutiesImpl();
+        // dbobj.connect();
+        // String output= dbobj.load();
+        // System.out.println(output +" from main");
+
+    //public String getDboj(){
+        // return dbobj.load();
+    //}
+    public static void main(String[] args) throws InterruptedException {
         // write your code here
         int i = 0;
         GameLogic object = new GameLogic();
@@ -35,7 +35,7 @@ import java.awt.AWTException;
      public static void clearScreen() throws InterruptedException {
          System.out.print("\033[H\033[2J");
          System.out.flush();
-    }*/
+    }
 
 }
 

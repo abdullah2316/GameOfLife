@@ -9,6 +9,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <VBox fx:id="vb" style="-fx-background-color: #6f6f6f;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mygroup.ui.GameScreenController">
     <Pane fx:id="header">
         <Label fx:id="temp" text="hellloooo" visible="false" />
@@ -20,5 +22,12 @@
          <Pane fx:id="grid_internal"    style="-fx-background-color: #404040;" BorderPane.alignment="CENTER" />
           </ScrollPane>
       </center></BorderPane>
-    <Slider fx:id="zoombar"/>
+    <HBox spacing="40" >
+        <Button fx:id="back_btn" text="back" onMouseClicked="#back"/>
+        <Button text="Next"/>
+        <Button text="Start"/>
+        <Button text="Reset"/>
+        <Button text="Clear"/>
+    </HBox>
+    <Slider fx:id="zoombar" maxWidth="100"/>
 </VBox>
