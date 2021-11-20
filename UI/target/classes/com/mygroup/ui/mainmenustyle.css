@@ -1,20 +1,26 @@
-.button
+.mainmenubuttons
 {
-
-  -fx-background-color:#2a4e97;
+  -fx-background-color:#2a4e97 ;
   -fx-width:250px;
   -fx-text-fill:white;
-   -fx-border: 5px ;
-   -fx-border-radius: 20px;
+   -fx-border-color:black;
    -fx-font-size:25px
 }
-#header
+.mainmenubuttons:hover
 {
--fx-background-color: linear-gradient(mediumblue, skyblue);
--fx-border-bottom: 5px ;
--fx-border-color:mediumblue
+-fx-background-color:darkblue;
+
 }
-#layout
+
+.gamebuttons
 {
--fx-background-color:  lightgray ;
+  -fx-background-color:#2a4e97;
+  -fx-width:300px;
+  -fx-text-fill:white;
+   -fx-border-width: 2px ;
+   -fx-border-radius: 20px;
+   -fx-font-size:25px;
+   -fx-border-color:white ;
+   -fx-background-radius:20px;
+     -fx-background-insets: 1px;
 }

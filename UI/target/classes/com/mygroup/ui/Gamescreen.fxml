@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
-<VBox fx:id="vb" style="-fx-background-color: #6f6f6f;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mygroup.ui.GameScreenController">
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="vb" xmlns="http://javafx.com/javafx/17"
+      fx:controller="com.mygroup.ui.GameScreenController">
     <Pane fx:id="header">
-        <Label fx:id="temp" text="hellloooo" visible="false" />
-        <ImageView fx:id="img" />
+        <ImageView fx:id="img" layoutX="500"/>
     </Pane>
-    <BorderPane fx:id="grid_ext"  style="-fx-background-color: #404040; -fx-padding: 13px;">
-      <center>
-          <ScrollPane fx:id="scroller">
-         <Pane fx:id="grid_internal"    style="-fx-background-color: #404040;" BorderPane.alignment="CENTER" />
-          </ScrollPane>
-      </center></BorderPane>
-    <HBox spacing="40" >
-        <Button fx:id="back_btn" text="back" onMouseClicked="#back"/>
-        <Button text="Next"/>
-        <Button text="Start"/>
-        <Button text="Reset"/>
-        <Button text="Clear"/>
+    <BorderPane fx:id="grid_ext" style=" -fx-padding: 13px;">
+        <center>
+            <ScrollPane fx:id="scroller">
+                <Pane fx:id="grid_internal" BorderPane.alignment="CENTER"/>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+
+    <HBox fx:id="bottombox" alignment="CENTER" spacing="40">
+        <Button fx:id="back_btn" onMouseClicked="#back" styleClass="gamebuttons" text="back" textAlignment="CENTER"/>
+        <Button fx:id="next" styleClass="gamebuttons" text="Next" textAlignment="CENTER"/>
+        <Button fx:id="start" styleClass="gamebuttons" text="Start" textAlignment="CENTER"/>
+        <Button fx:id="reset" styleClass="gamebuttons" text="Reset" textAlignment="CENTER"/>
+        <Button fx:id="clear" styleClass="gamebuttons" text="Clear" textAlignment="CENTER"/>
+        <padding>
+            <Insets top="20.0"/>
+        </padding>
     </HBox>
-    <Slider fx:id="zoombar" maxWidth="100"/>
+
+    <HBox fx:id="speedZoom" alignment="CENTER">
+        <HBox alignment="CENTER" spacing="10" styleClass="slidercontainer" minHeight="50" minWidth="350">
+            <HBox alignment="CENTER" spacing="4">
+                <ImageView fx:id="zoom_img"/>
+                <Slider fx:id="zoombar" maxWidth="100"/>
+            </HBox>
+            <HBox alignment="CENTER" spacing="3">
+                <ImageView fx:id="speed_img"/>
+                <Slider fx:id="speedBar" maxWidth="100"/>
+            </HBox>
+        </HBox>
+        <padding>
+            <Insets top="20.0"/>
+        </padding>
+    </HBox>
 </VBox>
