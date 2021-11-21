@@ -72,7 +72,7 @@ public class MainMenuController {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();
-        obj.change_scene(stageTheLayoutBelongs, scene, "SavedStates.fxml", true, "SavedStates.css");
+        obj.change_scene(stageTheLayoutBelongs, scene, "States.fxml", true, "States.css");
     }
 
     private void setIcon(Button button, String path) {

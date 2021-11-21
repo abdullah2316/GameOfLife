@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<VBox   fx:id="layout"  xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:id="layout"
       fx:controller="com.mygroup.ui.MainMenuController">
-  <VBox fx:id="menu" alignment="BASELINE_CENTER" spacing="10.0"  >
-        <ImageView layoutX="500" fx:id="img"  />
-  <Button fx:id="new_state" text="New State" minWidth="250" styleClass="mainmenubuttons"  onMouseClicked="#switch_to_gamescreen"/>
-  <Button fx:id="load_state" text="Load State" minWidth="250" styleClass="mainmenubuttons" onMouseClicked="#switch_to_SavedStates"/>
-    <Button fx:id="View_States" text="View States" minWidth="250" styleClass="mainmenubuttons" onMouseClicked="#switch_to_SavedStates"/>
-    <Button fx:id="Delete_state" text="Delete State " styleClass="mainmenubuttons" minWidth="250"/>
-  <Button fx:id="exit" text="EXIT" styleClass="mainmenubuttons" minWidth="250"/>
-    <padding>
-      <Insets top="50.0"  />
-    </padding>
-  </VBox>
+    <VBox fx:id="menu" alignment="BASELINE_CENTER" spacing="10.0">
+        <ImageView layoutX="500" fx:id="img"/>
+        <Button fx:id="new_state" text="New State" minWidth="250" styleClass="mainmenubuttons"
+                onMouseClicked="#switch_to_gamescreen"/>
+        <Button fx:id="load_state" text="Load State" minWidth="250" styleClass="mainmenubuttons"
+                onMouseClicked="#switch_to_savedStates"/>
+        <Button fx:id="View_States" text="View States" minWidth="250" styleClass="mainmenubuttons"
+                onMouseClicked="#switch_to_savedStates"/>
+        <Button fx:id="Delete_state" text="Delete State " styleClass="mainmenubuttons" minWidth="250"/>
+        <Button fx:id="exit" text="EXIT" styleClass="mainmenubuttons" minWidth="250"/>
+        <padding>
+            <Insets top="50.0"/>
+        </padding>
+    </VBox>
 </VBox>

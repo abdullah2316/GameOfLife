@@ -1,0 +1,39 @@
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.Tetxtcontainer
+{
+
+-fx-background-color:#b0c4de;
+-fx-border-width:2px;
+-fx-border-color:mediumblue;
+-fx-border-radius:5px;
+-fx-background-radius:5px;
+ -fx-background-insets: 1px;
+}
+
+.textlabels
+{
+  -fx-font-size:15px;
+
+}
+.textlabelmain
+{
+  -fx-font-size:25px;
+
+}
+.statebutton
+{
+  -fx-background-color:#2a4e97;
+  -fx-width:300px;
+  -fx-text-fill:white;
+   -fx-border-width: 2px ;
+   -fx-border-radius: 20px;
+   -fx-font-size:25px;
+   -fx-border-color:white ;
+   -fx-background-radius:20px;
+     -fx-background-insets: 1px;
+}

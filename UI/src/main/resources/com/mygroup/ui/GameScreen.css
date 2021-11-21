@@ -43,6 +43,29 @@
    -fx-background-radius:20px;
      -fx-background-insets: 1px;
 }
+.gamebuttonss
+{
+                 -fx-text-transform: uppercase;
+                -fx-border-radius: 10px;
+                -fx-background-color: #1adbe5;
+                -fx-width: 50%;
+                -fx-border: 0;
+                -fx-padding: 15px;
+                -fx-color: white;
+                -fx-font-size: 14px;
+                -fx-cursor: pointer;
+                -fx-text-fill: white;
+                -fx-font-size: 2em;
+                -fx-border-width: 5px;
+                -fx-border-color: linear-gradient(to left, #00C853, #B2FF59);
+                -fx- border: 10px solid;
+                -fx-border-image-slice: 1;
+                -fx-border-width: 5px;
+                -fx-transition: all 1s ease 0s;
+                -fx-border-color: cyan;
+
+
+}
 .gamebuttons:hover
 {
   -fx-background-color:blue;

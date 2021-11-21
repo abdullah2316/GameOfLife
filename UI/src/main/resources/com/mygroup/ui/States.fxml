@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="main" prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17" fx:controller="com.mygroup.ui.StatesController">
+    <HBox alignment="CENTER">
+        <ImageView fx:id="header">
+
+        </ImageView>
+    </HBox>
+    <ScrollPane fx:id="main_spane">
+        <VBox alignment="CENTER" minWidth="800" spacing="30" style="-fx-background-color:transparent">
+            <VBox maxHeight="100" minWidth="100" spacing="5" styleClass="Tetxtcontainer">
+                <HBox alignment="CENTER" style="-fx-background-color:transparent">
+                    <Label styleClass="textlabelmain" text="State-1"/>
+                </HBox>
+                <HBox minWidth="800" style="-fx-background-color:Transparent">
+                    <VBox alignment="CENTER_LEFT" minWidth="400">
+                        <Label styleClass="textlabels" text="date Saved: 12-2-3"/>
+                        <Label styleClass="textlabels" text="Time Saved: 11:03"/>
+                    </VBox>
+                    <HBox alignment="CENTER_RIGHT" minWidth="400">
+                        <Button styleClass="statebutton" text="SAVE"/>
+                    </HBox>
+
+                </HBox>
+
+                <Pane maxHeight="200" minHeight="200" minWidth="300" style="-fx-background-color:skyblue">
+                </Pane>
+
+            </VBox>
+
+            <VBox maxHeight="100" minWidth="100" spacing="5" styleClass="Tetxtcontainer">
+                <Label styleClass="textlabelmain" text="State-1"/>
+                <Label styleClass="textlabels" text="Saved on date: 12-2-3"/>
+                <Label styleClass="textlabels" text="Time:11:03"/>
+                <Pane maxHeight="200" minHeight="200" minWidth="300" style="-fx-background-color:skyblue">
+                </Pane>
+                <Button text="SAVE"/>
+            </VBox>
+
+            <VBox maxHeight="100" minWidth="100" spacing="5" styleClass="Tetxtcontainer">
+                <Label styleClass="textlabelmain" text="State-1"/>
+                <Label styleClass="textlabels" text="Saved on date: 12-2-3"/>
+                <Label styleClass="textlabels" text="Time:11:03"/>
+                <Pane maxHeight="200" minHeight="200" minWidth="300" style="-fx-background-color:skyblue">
+                </Pane>
+                <Button text="SAVE"/>
+            </VBox>
+            <padding>
+                <Insets bottom="30" left="20.0" top="30"/>
+            </padding>
+
+        </VBox>
+    </ScrollPane>
+</VBox>
