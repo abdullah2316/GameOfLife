@@ -1,3 +1,7 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.sql.SQLException;
+
 public class GameLogic {
     private GameBoard Board;
     private boolean State;
@@ -20,7 +24,15 @@ public class GameLogic {
         Board.displayBoard();
     }
     
-    public void SaveState(){
+    public void SaveState(@NotNull DBdutiesImpl object) throws SQLException {
+        object.save(Board.copyToArray());
+    }
+
+    public void LoadState(int Save, @NotNull DBdutiesImpl object) throws SQLException {
+        Board.copyfromArray(object.load(Save));
+    }
+
+    public void DeleteState(int Save){
 
     }
     
@@ -67,6 +79,7 @@ public class GameLogic {
     public void Stop(){
         State = false;
     }
+
     public void Reset(){
         Zoom_Factor = 1;
         Counter = 0;
