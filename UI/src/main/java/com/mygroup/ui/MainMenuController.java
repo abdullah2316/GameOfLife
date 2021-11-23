@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -68,7 +70,15 @@ public class MainMenuController {
         obj.change_scene(stageTheLayoutBelongs, scene, "Gamescreen.fxml", true, "GameScreen.css");
     }
 
-    public void switch_to_savedStates() throws Exception {
+    public void switch_to_savedStates(MouseEvent e) throws Exception {
+        if (Objects.equals(((Control) e.getSource()).getId(), "View_States"))
+            Connector.data = 'v';
+        else if (Objects.equals(((Control) e.getSource()).getId(), "load_state"))
+            Connector.data = 'l';
+        else
+            Connector.data = 'd';
+
+        System.out.println(((Control) e.getSource()).getId());
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();

@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class MainMenu extends Application {
     public double width;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("MainMenu.fxml"));
@@ -33,11 +34,12 @@ public class MainMenu extends Application {
 
         stage.setMaxHeight(primaryScreenBounds.getHeight());
         stage.setMinHeight(primaryScreenBounds.getHeight());
-        width=stage.getMinWidth();
+        width = stage.getMinWidth();
         //setting app icon
         stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("images/icon.png")).toString()));
         stage.show();
     }
+
     public void Set_StyleSheet(Scene scene, String StyleSheet) {
         scene.getStylesheets().removeAll();
         URL url = this.getClass().getResource(StyleSheet);
@@ -49,6 +51,7 @@ public class MainMenu extends Application {
         scene.getStylesheets().add(css);
 
     }
+
     public void change_scene(Stage stage, Scene scene, String sceneName, boolean change_StyleSheet, String StyleSheet) throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource(sceneName));
