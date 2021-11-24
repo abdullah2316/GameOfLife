@@ -8,7 +8,7 @@ public interface GameUI {
     ArrayList<Integer> Update();
 
     // save State in DB
-    void Save();
+    void Save(String name, String date, String time);
 
     //load initial pattern
     ArrayList<Integer> initialize();
@@ -17,6 +17,8 @@ public interface GameUI {
     void Clear();
 
     //reload the initially drawn prebuilt pattern
-    int[] reset();
+   ArrayList<Integer> reset();
+    
+    
 
 }
