@@ -1,5 +1,9 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import static java.lang.String.valueOf;
 
 public class DBdutiesImpl implements DBduties {
@@ -31,9 +35,8 @@ public class DBdutiesImpl implements DBduties {
         return m_ResultSet.getInt(1);
     }
 
-    @Override
     public int[] load(int Save) throws SQLException {
-        if(getSaves() < Save) return null;
+        if(getSaves() < Save) return new int[]{0};
         int Counter = ((getCount(Save)) * 2) + 1;
         int []array = new int[Counter]; //Count = Rows + Columns + 1 (for size)
         array[0] = Counter;
@@ -48,13 +51,15 @@ public class DBdutiesImpl implements DBduties {
         return array;
     }
 
-    @Override
-    public void save(ArrayList<Integer> array) throws SQLException {
+    public void save(String Name, @NotNull ArrayList<Integer> array) throws SQLException {
         String query = "SELECT Max([Save]) FROM Cells";
         ResultSet m_ResultSet = m_Statement.executeQuery(query);
         int Save = m_ResultSet.getInt(1) + 1;
-        for (int  i = 0 ; i < array.size() ; i += 2)
-            m_Statement.executeUpdate("INSERT INTO Cells " + "VALUES (" + valueOf(array.get(i)) + "," + valueOf(array.get(i+1)) + ")");
+        for (int  i = 0 ; i < array.size() ; i += 2) {
+            m_Statement.executeUpdate("INSERT INTO Cells VALUES (" + Save + ", " + valueOf(array.get(i)) + "," + valueOf(array.get(i + 1)) + ")");
+        }
+        m_Statement.executeQuery("INSERT INTO SAVE_INFO VALUES (" + Save + ", " + java.time.LocalDate.now() + ", " + java.time.LocalTime.now() + ")");
+        // TIME FORMAT: 00:01:14.341,  DATE FORMAT: 2017-01-23
     }
 
     void PrintTable() throws SQLException {
