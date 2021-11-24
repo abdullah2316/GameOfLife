@@ -54,11 +54,17 @@ public class DBdutiesImpl implements DBduties {
     public void save(String Name, @NotNull ArrayList<Integer> array) throws SQLException {
         String query = "SELECT Max([Save]) FROM Cells";
         ResultSet m_ResultSet = m_Statement.executeQuery(query);
-        int Save = m_ResultSet.getInt(1) + 1;
+        int Save;
+        if (m_ResultSet.next() == false)
+            Save = 1;
+        else
+            Save = m_ResultSet.getInt(1) + 1;
+
         for (int  i = 0 ; i < array.size() ; i += 2) {
             m_Statement.executeUpdate("INSERT INTO Cells VALUES (" + Save + ", " + valueOf(array.get(i)) + "," + valueOf(array.get(i + 1)) + ")");
         }
-        m_Statement.executeQuery("INSERT INTO SAVE_INFO VALUES (" + Save + ", " + java.time.LocalDate.now() + ", " + java.time.LocalTime.now() + ")");
+        String query2 = "INSERT INTO SAVE_INFO VALUES ( " + Save + ", '" + Name + "' , NULL , NULL)";
+        m_Statement.executeUpdate(query2);
         // TIME FORMAT: 00:01:14.341,  DATE FORMAT: 2017-01-23
     }
 
