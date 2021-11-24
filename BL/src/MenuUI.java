@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+
 public interface MenuUI {
-    void LoadSavedStates(StringBuilder[] Date_Time, int[] Coordinates);
+    void LoadSavedStates(ArrayList<StringBuilder> Date_Time, ArrayList<Integer> Coordinates);
 
     void DeleteState(int id);
+
+    ArrayList<Integer> start();
 }
