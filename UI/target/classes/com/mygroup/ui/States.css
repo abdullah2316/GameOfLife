@@ -37,3 +37,8 @@
    -fx-background-radius:20px;
      -fx-background-insets: 1px;
 }
+
+.statebutton:hover
+{
+  -fx-background-color:darkblue;
+}

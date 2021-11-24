@@ -3,14 +3,17 @@ package com.mygroup.ui;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -22,6 +25,7 @@ public class StatesController {
     public ImageView header;
     public Pane board;
     public VBox main_container;
+    public Button back_btn;
     private char flag;
 
     @FXML
@@ -31,6 +35,8 @@ public class StatesController {
         System.out.println(flag);
         Image image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
         header.setImage(image_header);
+        //setting back button
+        setIconToButton(back_btn, "images/back.png");
         //setting background
         main.setMinHeight(705);
         main.setBackground(new Background(
@@ -89,10 +95,13 @@ public class StatesController {
 
                 Button button = new Button();
                 button.getStyleClass().add("statebutton");
-                if (flag == 'l')
+                if (flag == 'l') {
                     button.setText("LOAD");
-                else if (flag == 'd')
+                    setIconToButton(button, "images/cloud.png");
+                } else if (flag == 'd') {
                     button.setText("Delete");
+                    setIconToButton(button, "images/delete.png");
+                }
                 buttonContainer.getChildren().add(button);
                 heading2.getChildren().add(buttonContainer);
             }
@@ -130,5 +139,20 @@ public class StatesController {
             }
             Y_coordinate += square_size;
         }
+    }
+
+    private void setIconToButton(Button button, String path) {
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(path)).toString());
+        ImageView image_view = new ImageView(image);
+        image_view.setFitHeight(25);
+        image_view.setPreserveRatio(true);
+        button.setGraphic(image_view);
+    }
+
+    public void back(MouseEvent mouseEvent) throws Exception {
+        MainMenu obj = new MainMenu();
+        Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
+        Scene scene = stageTheLayoutBelongs.getScene();
+        obj.change_scene(stageTheLayoutBelongs, scene, "MainMenu.fxml", true, "mainmenustyle.css");
     }
 }

@@ -19,37 +19,37 @@ import java.util.Objects;
 
 public class GameScreenController {
 
-    private final double height = 400;//actual height of pane on screen
+
     private final double width = 1340;//actual width of pane on screen
-    private final int columsOnScreen = 40;//at zoom=1
+    private final int columsOnScreen = 80;//at zoom=1
     private final double square_size = width / columsOnScreen;
-    private final int rowsOnScreen = 30;//at zoom=1
-    public Pane header;
-    public ImageView img;
-    public Button back_btn;
-    public VBox vb;
-    public Pane grid_internal;
-    public BorderPane grid_ext;
-    public ScrollPane scroller;
-    public Slider zoombar;
-    public Button start;
-    public HBox bottombox;
-    public Button clear;
-    public Button reset;
-    public Button next;
-    public HBox speedZoom;
-    public StackPane trackPane;
-    public Slider speedBar;
-    public ImageView zoom_img;
-    public ImageView speed_img;
+    private Button clear;
+    private Button reset;
+    private Button next;
+    private HBox speedZoom;
+    private Pane grid_internal;
+    private BorderPane grid_ext;
+    private ScrollPane scroller;
+    private Slider zoombar;
+    private Button start;
+    private HBox bottombox;
+    private Pane header;
+    private ImageView img;
+    private Button back_btn;
+    private VBox vb;
+    private StackPane trackPane;
+    private Slider speedBar;
+    private ImageView zoom_img;
+    private ImageView speed_img;
     private int center_positionX;
     private int center_positionY;
-    private int Total_columns = 40;//total columns
-    private int Total_rows = 20;
     private Rectangle[][] Rectangles;
 
     public void initialize() {
-        Rectangles = new Rectangle[Total_rows][Total_columns];
+        int total_rows = 24;
+        //total columns
+        int total_columns = 80;
+        Rectangles = new Rectangle[total_rows][total_columns];
         Image image_header;
         //setting header image
         image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
@@ -58,13 +58,13 @@ public class GameScreenController {
         System.out.println(primaryScreenBounds.getWidth());
         //setting up grid
         //logical width of pane i.e scrollable
-        double logical_width = CalcLogicalwidth(Total_columns);
+        double logical_width = CalcLogicalwidth(total_columns);
         //logical height of pane i.e scrollable
-        double logical_height = CalcLogicalHeight(Total_rows);
+        double logical_height = CalcLogicalHeight(total_rows);
         double Y_coordinate = 0;
-        for (int row_index = 0; row_index < Total_rows; row_index = (int) Math.round(Y_coordinate / square_size)) {
+        for (int row_index = 0; row_index < total_rows; row_index = (int) Math.round(Y_coordinate / square_size)) {
             double X_coordinate = 0;
-            for (int col_index = 0; col_index < Total_columns; col_index = (int) Math.round(X_coordinate / square_size)) {
+            for (int col_index = 0; col_index < total_columns; col_index = (int) Math.round(X_coordinate / square_size)) {
                 Rectangle r = new Rectangle(X_coordinate, Y_coordinate, square_size, square_size);
                 r.setFill(Color.valueOf("#b0c4de"));
                 r.setStroke(Color.valueOf("#1e90ff"));
@@ -75,6 +75,8 @@ public class GameScreenController {
             grid_internal.getChildren().addAll(Rectangles[row_index]);
             Y_coordinate += square_size;
         }
+        //set alive cells
+        fillAlive();
         //panning grid
         scroller.setPannable(true);
         scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -85,8 +87,8 @@ public class GameScreenController {
         scroller.setHvalue(500);
         //setting zoom functionality
         zoombar.setMax(2);
-        zoombar.setMin(0.75);
-        zoombar.setValue(1);
+        zoombar.setMin(1);
+        zoombar.setValue(1.5);
         grid_internal.scaleXProperty().bind(zoombar.valueProperty());
         grid_internal.scaleYProperty().bind(zoombar.valueProperty());
         //setting button icons
@@ -114,7 +116,8 @@ public class GameScreenController {
                 ))));
     }
 
-    public void back() throws Exception {
+
+    private void back() throws Exception {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();
@@ -122,14 +125,19 @@ public class GameScreenController {
 
     }
 
+    private void fillAlive() {
+        for (int i = 0; i < Connector.currentAlive.size(); i += 2)
+            Rectangles[Connector.currentAlive.get(i)][Connector.currentAlive.get(i + 1)].setFill(Color.BLUE);
+    }
+
     public void Reset_Grid() {
     }
 
-    public double CalcLogicalwidth(int columns) {
+    private double CalcLogicalwidth(int columns) {
         return square_size * columns;
     }
 
-    public double CalcLogicalHeight(int rows) {
+    private double CalcLogicalHeight(int rows) {
         return square_size * rows;
     }
 

@@ -28,6 +28,7 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
+        Connector temp = new Connector();
         //setting header image
         Image image_header;
         image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
