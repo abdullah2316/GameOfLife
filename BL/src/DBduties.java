@@ -3,5 +3,5 @@ import java.util.ArrayList;
 
 public interface DBduties {
     public int[] load(int Save) throws SQLException;
-    void save(ArrayList<Integer> array) throws SQLException;
+    public void save(String Name, ArrayList<Integer> array) throws SQLException;
 }
