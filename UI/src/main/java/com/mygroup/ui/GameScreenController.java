@@ -1,5 +1,6 @@
 package com.mygroup.ui;
 
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -23,32 +24,48 @@ public class GameScreenController {
     private final double width = 1340;//actual width of pane on screen
     private final int columsOnScreen = 80;//at zoom=1
     private final double square_size = width / columsOnScreen;
+    @FXML
     private Button clear;
+    @FXML
     private Button reset;
+    @FXML
     private Button next;
+    @FXML
     private HBox speedZoom;
+    @FXML
     private Pane grid_internal;
+    @FXML
     private BorderPane grid_ext;
+    @FXML
     private ScrollPane scroller;
+    @FXML
     private Slider zoombar;
+    @FXML
     private Button start;
+    @FXML
     private HBox bottombox;
+    @FXML
     private Pane header;
+    @FXML
     private ImageView img;
+    @FXML
     private Button back_btn;
+    @FXML
     private VBox vb;
-    private StackPane trackPane;
+    @FXML
     private Slider speedBar;
+    @FXML
     private ImageView zoom_img;
+    @FXML
     private ImageView speed_img;
     private int center_positionX;
     private int center_positionY;
     private Rectangle[][] Rectangles;
 
     public void initialize() {
-        int total_rows = 24;
+        int total_rows = 40;
         //total columns
-        int total_columns = 80;
+        int total_columns = 100;
         Rectangles = new Rectangle[total_rows][total_columns];
         Image image_header;
         //setting header image
@@ -117,6 +134,7 @@ public class GameScreenController {
     }
 
 
+    @FXML
     private void back() throws Exception {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
