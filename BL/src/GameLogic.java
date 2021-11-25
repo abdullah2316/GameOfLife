@@ -81,8 +81,9 @@ public class GameLogic implements GameUI {
     public void Start(){
         State = true;
     }
-    public void Stop(){
+    public boolean Stop(){
         State = false;
+        return false;
     }
 
     public void Reset(){
