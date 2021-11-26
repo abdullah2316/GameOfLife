@@ -20,7 +20,7 @@
     <HBox fx:id="bottombox" alignment="CENTER" spacing="40">
         <Button fx:id="back_btn" onMouseClicked="#back" styleClass="gamebuttons" text="back" textAlignment="CENTER"/>
         <Button fx:id="next" styleClass="gamebuttons" text="Next" textAlignment="CENTER"/>
-        <Button fx:id="start" styleClass="gamebuttons" text="Start" textAlignment="CENTER"/>
+        <Button fx:id="start" styleClass="gamebuttons" text="Start" textAlignment="CENTER" onMouseClicked="#start"/>
         <Button fx:id="reset" styleClass="gamebuttons" text="Reset" textAlignment="CENTER"/>
         <Button fx:id="clear" styleClass="gamebuttons" text="Clear" textAlignment="CENTER"/>
         <padding>

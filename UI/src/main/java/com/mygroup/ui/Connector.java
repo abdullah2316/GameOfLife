@@ -8,6 +8,7 @@ public class Connector {
     public static ArrayList<Integer> coordinates_data;
     public static ArrayList<StringBuilder> date_time;
     public static ArrayList<Integer> currentAlive;
+    //public static driver obj;
 
     public Connector() {
         coordinates_data = new ArrayList<>();
