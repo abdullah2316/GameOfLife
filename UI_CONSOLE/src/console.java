@@ -52,12 +52,22 @@ public class console extends JFrame {
 }
 
  */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.awt.AWTException;
 import java.io.InputStreamReader;
 
+
+
 public class Main  {
+
+    public static void displayMenu(){
+        System.out.println("+------------------------+");
+        System.out.println("| Welcome to GamE of LifE  |");
+        System.out.println("+------------------------+");
+
+    }
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -67,11 +77,11 @@ public class Main  {
         Gameboard object = new board();
 
 
-        object.displayMenu();
+        displayMenu();
         object.displayBoard();
 
         Thread.sleep(1000);
-        object.clear();
+        object0.clear();
 
         while(true) {
 
@@ -79,11 +89,11 @@ public class Main  {
                 object0.Reset();
             }
             System.out.println();
-            object.displayMenu();
+            displayMenu();
             object0.updateBoard();
             object.displayBoard();
             Thread.sleep(1000);
-            object.clear();
+            object0.clear();
 
         }
 
