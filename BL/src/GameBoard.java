@@ -79,14 +79,37 @@ public class GameBoard {
     public int check_neighbor(int row, int col) {
         int count = 0;
 
-        if (row > 0) if (Cells[row - 1][col].check_IsAlive()) count++;
-        if (row > 0 && col > 0) if (Cells[row - 1][col - 1].check_IsAlive()) count++;
-        if (row > 0 && col < Size - 1) if (Cells[row - 1][col + 1].check_IsAlive()) count++;
-        if (row < Size - 1) if (Cells[row + 1][col].check_IsAlive()) count++;
-        if (row < Size - 1 && col > 0) if (Cells[row + 1][col - 1].check_IsAlive()) count++;
-        if (row < Size - 1 && col < Size - 1) if (Cells[row + 1][col + 1].check_IsAlive()) count++;
-        if (row < Size - 1 && col > 0) if (Cells[row][col - 1].check_IsAlive()) count++;
-        if (col < Size - 1) if (Cells[row][col + 1].check_IsAlive()) count++;
+        if (row > 0) 
+            if (Cells[row - 1][col].check_IsAlive()) 
+                count++;
+            
+        if (row > 0 && col > 0) 
+            if (Cells[row - 1][col - 1].check_IsAlive()) 
+                count++;
+            
+        if (row > 0 && col < Size - 1) 
+            if (Cells[row - 1][col + 1].check_IsAlive()) 
+                count++;
+                
+        if (row < Size - 1) 
+            if (Cells[row + 1][col].check_IsAlive()) 
+                count++;
+        
+        if (row < Size - 1 && col > 0) 
+            if (Cells[row + 1][col - 1].check_IsAlive()) 
+                count++;
+            
+        if (row < Size - 1 && col < Size - 1) 
+            if (Cells[row + 1][col + 1].check_IsAlive()) 
+                count++;
+        
+        if (row < Size - 1 && col > 0) 
+            if (Cells[row][col - 1].check_IsAlive()) 
+                count++;
+        
+        if (col < Size - 1) 
+            if (Cells[row][col + 1].check_IsAlive()) 
+                count++;
 
         return count;
     }
