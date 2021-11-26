@@ -60,7 +60,7 @@ import java.io.InputStreamReader;
 
 
 
-public class Main  {
+class Main  {
 
     public static void displayMenu(){
         System.out.println("+------------------------+");
@@ -86,9 +86,9 @@ public class Main  {
 
         while(true) {
 
-            if (object0.Stop()) {
-                object0.Reset();
-            }
+           // if (object0.Stop()) {
+             //   object0.Reset();
+            //}
             System.out.println();
             displayMenu();
             object0.updateBoard();
