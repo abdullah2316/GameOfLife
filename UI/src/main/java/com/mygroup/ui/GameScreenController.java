@@ -1,5 +1,9 @@
 package com.mygroup.ui;
 
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
@@ -9,17 +13,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Collections;
 import java.util.Objects;
 
 public class GameScreenController {
-
 
     private final double width = 1340;//actual width of pane on screen
     private final int columsOnScreen = 80;//at zoom=1
@@ -61,6 +66,7 @@ public class GameScreenController {
     private int center_positionX;
     private int center_positionY;
     private Rectangle[][] Rectangles;
+
 
     public void initialize() {
         int total_rows = 40;
@@ -131,8 +137,20 @@ public class GameScreenController {
                         BackgroundPosition.DEFAULT,
                         new BackgroundSize(1.0, 1.0, true, true, false, false)
                 ))));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            Rectangles[10][0].setFill(Color.YELLOW);
+            System.out.println("o wow");
+//            test object = new test();
+//            test.updateBoard();
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
     }
 
+    public void temp() {
+
+    }
 
     @FXML
     private void back() throws Exception {
@@ -172,5 +190,21 @@ public class GameScreenController {
         image_view.setImage(image);
         image_view.setFitHeight(25);
         image_view.setPreserveRatio(true);
+    }
+
+    public void start(MouseEvent mouseEvent) throws InterruptedException {
+        Button b = (Button) mouseEvent.getSource();
+        if (Objects.equals(b.getText(), "Start")) {
+            b.setText("Stop");
+            setIconToButton(b, "images/stop.png");
+            //Thread.sleep(5000);
+            Rectangles[0][0].setFill(Color.RED);
+        } else {
+            b.setText("Start");
+            setIconToButton(b, "images/play.png");
+            Rectangles[0][0].setFill(Color.BLACK);
+
+        }
+
     }
 }
