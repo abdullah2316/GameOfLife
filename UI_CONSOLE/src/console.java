@@ -74,14 +74,15 @@ public class Main  {
 
         int i = 0;
         GameLogic object0 = new GameLogic();
-        Gameboard object = new board();
+       // Gameboard object = new board();
 
 
         displayMenu();
-        object.displayBoard();
+        object0.ConstructBoard();
+        object0.displayBoard();
 
         Thread.sleep(1000);
-        object0.clear();
+        object0.Clear();
 
         while(true) {
 
@@ -91,9 +92,9 @@ public class Main  {
             System.out.println();
             displayMenu();
             object0.updateBoard();
-            object.displayBoard();
+            object0.displayBoard();
             Thread.sleep(1000);
-            object0.clear();
+            object0.Clear();
 
         }
 
