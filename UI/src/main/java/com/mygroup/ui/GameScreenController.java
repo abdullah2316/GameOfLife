@@ -140,6 +140,8 @@ public class GameScreenController {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             Rectangles[10][0].setFill(Color.YELLOW);
             System.out.println("o wow");
+//            test object = new test();
+//            test.updateBoard();
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
