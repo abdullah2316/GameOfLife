@@ -1,4 +1,4 @@
-/*import java.io.IOException;
+import java.io.IOException;
 import java.awt.AWTException;
 
  public class Main {
@@ -40,45 +40,4 @@ import java.awt.AWTException;
 }
 
 
- */
-import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.awt.AWTException;
-        import java.io.InputStreamReader;
 
-public class Main  {
-
-    public static void main(String[] args) throws InterruptedException, IOException {
-
-
-        int i = 0;
-        GameLogic object0 = new GameLogic();
-        board object = new board();
-
-
-        object.displayMenu();
-        object.displayBoard();
-
-        Thread.sleep(1000);
-        object.clear();
-
-        while(true) {
-
-            if (object0.Stop()) {
-                object0.Reset();
-            }
-            System.out.println();
-            object.displayMenu();
-            object0.updateBoard();
-            object.displayBoard();
-            Thread.sleep(1000);
-            object.clear();
-
-        }
-
-
-
-
-    }
-
-}

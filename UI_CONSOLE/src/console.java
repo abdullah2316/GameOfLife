@@ -1,4 +1,4 @@
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -49,4 +49,47 @@ public class console extends JFrame {
         frame.add(panel2);
 
     }
+}
+
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.awt.AWTException;
+import java.io.InputStreamReader;
+
+public class Main  {
+
+    public static void main(String[] args) throws InterruptedException, IOException {
+
+
+        int i = 0;
+        GameLogic object0 = new GameLogic();
+        Gameboard object = new board();
+
+
+        object.displayMenu();
+        object.displayBoard();
+
+        Thread.sleep(1000);
+        object.clear();
+
+        while(true) {
+
+            if (object0.Stop()) {
+                object0.Reset();
+            }
+            System.out.println();
+            object.displayMenu();
+            object0.updateBoard();
+            object.displayBoard();
+            Thread.sleep(1000);
+            object.clear();
+
+        }
+
+
+
+
+    }
+
 }
