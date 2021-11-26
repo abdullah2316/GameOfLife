@@ -47,7 +47,15 @@ public class GameBoard {
         return Cells[row][column].check_IsAlive();
     }
 
-    public void ResetBoard(){
+    public void ClearBoard() {
+        for (int i = 0; i < Size; i++) {
+            for (int j = 0; j < Size; j++) {
+                Cells[i][j].setAlive(false);
+            }
+        }
+    }
+
+        public void ResetBoard(){
         for(int i=0; i < Size ; i++){
             for(int j=0; j < Size ; j++){
                 Cells[i][j].setAlive(false);
