@@ -22,16 +22,16 @@ public class DBdutiesImpl implements DBduties {
     }
 
     public StringBuilder[][] viewSavedStates() throws SQLException {
-        String query = "Select * from SaveInfo";
-        ResultSet m_ResultSet = m_Statement.executeQuery(query);
         int count = getSaves();
-        StringBuilder[][] array = new StringBuilder[count][];
+        StringBuilder[][] array = new StringBuilder[count][5];
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < 5; j++) {
                 array[i][j] = new StringBuilder("");
             }
         }
         int i = 0;
+        String query = "Select * from Save_Info";
+        ResultSet m_ResultSet = m_Statement.executeQuery(query);
         while (m_ResultSet.next()) {
             array[i][0].append(m_ResultSet.getInt(1));
             array[i][1].append(m_ResultSet.getString(2));
@@ -48,7 +48,7 @@ public class DBdutiesImpl implements DBduties {
 
 
     int getSaves() throws SQLException {
-        String query = "SELECT MAX([Save]) from Cells";
+        String query = "SELECT Count(*) from Save_Info";
         ResultSet m_ResultSet = m_Statement.executeQuery(query);
         m_ResultSet.next();
         return m_ResultSet.getInt(1);
