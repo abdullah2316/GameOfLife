@@ -1,25 +1,21 @@
 import org.jetbrains.annotations.NotNull;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GameLogic implements GameUI {
     private GameBoard Board;
     private boolean State;
-    private int Zoom_Factor;
-    private int Counter;
-    private int Speed;
+    private int Generation;
     private int SpeedLimit;
 
     public GameLogic(){
-        Zoom_Factor = 1;
-        Counter = 0;
-        Speed = 1;
+        Generation = 1;
         SpeedLimit = 10;
         State = true;
     }
-    public void ConstructBoard(){
+    public ArrayList<Integer> ConstructBoard(){
         Board = new GameBoard();
+        return Board.Pattern();
     }
     public void displayBoard(){
         Board.displayBoard();
@@ -29,9 +25,12 @@ public class GameLogic implements GameUI {
         Board.isClicked(row, column);
     }
 
+    public void ViewSavedStates() {
+
+    }
 
     public void Save(String Name, @NotNull DBdutiesImpl object) throws SQLException {
-        object.save(Name, Board.copyToArray());
+        object.save(Name, Generation, Board.copyToArray());
     }
 
     public void LoadState(int Save, @NotNull DBdutiesImpl object) throws SQLException {
@@ -63,35 +62,22 @@ public class GameLogic implements GameUI {
             }
         }
         Board.copy(temp);
-        Counter++;
+        Generation++;
         return arr;
     }
 
-    public void incrementSpeed(){
-        if (Speed < SpeedLimit)
-            Speed++;
-    }
-    public void decrementSpeed(){
-        if (Speed > 1)
-            Speed--;
-    }
-    public void ResetGrid(){
-        Board.ResetBoard();
-    }
     public void Start(){
         State = true;
     }
-    public  void Stop(){
+    public void Stop(){
         State = false;
     }
 
-    public void Reset(){
-        Zoom_Factor = 1;
-        Counter = 0;
-        Speed = 1;
-        Board.ResetBoard();
+    public ArrayList<Integer> Reset() {
+        Generation = 1;
+        return Board.Pattern();
     }
-    public void Clear() {
-        Board.ClearBoard();
+    public ArrayList<Integer> Clear() {
+        return Board.ClearBoard();
     }
 }
