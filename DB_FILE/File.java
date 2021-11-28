@@ -75,12 +75,10 @@ public class DB_Filing {
             int j = 0;
             while (j < iterations)
             {
-                Integer number = Integer.parseInt(scan.nextLine());
-                Integer col = number % 10;
-                number = number / 10;
-                Integer row = number;
-                cells.add(row);
-                cells.add(col);
+                Integer number = scan.nextInt();
+                cells.add(number);
+                number = scan.nextInt();
+                cells.add(number);
                 j++;
             }
             info.add(new StringBuilder(scan.nextLine()));
@@ -89,6 +87,7 @@ public class DB_Filing {
             info.add(new StringBuilder(n));
             info.add(new StringBuilder(scan.nextLine()));
         }
+
 
     }
 }
