@@ -31,5 +31,7 @@ public class Main {
         DB_Filing Fil = new DB_Filing();
         Fil.save_into_file("abc", 1, Arr);
         Fil.save_into_file("Abdullah", 5, Arr2);
+        Fil.deletestate("State2.txt");
+        Fil.save("ggggg", 8, Arr2);
     }
 }
