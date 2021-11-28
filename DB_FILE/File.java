@@ -60,4 +60,35 @@ public class DB_Filing {
             }
         }
     }
+    
+    public  void Load(ArrayList<StringBuilder> info, ArrayList<Integer> cells) throws FileNotFoundException {
+        int total_states = FileList.size();
+        cells.add(total_states);
+        String n = new String();
+        for (int i = 0; i < FileList.size(); i++)
+        {
+            n = FileList.get(i);
+            File myFile = new File (n);
+            Scanner scan = new Scanner(myFile);
+            Integer iterations = Integer.parseInt(scan.nextLine());
+            cells.add(iterations);
+            int j = 0;
+            while (j < iterations)
+            {
+                Integer number = Integer.parseInt(scan.nextLine());
+                Integer col = number % 10;
+                number = number / 10;
+                Integer row = number;
+                cells.add(row);
+                cells.add(col);
+                j++;
+            }
+            info.add(new StringBuilder(scan.nextLine()));
+            info.add(new StringBuilder(scan.nextLine()));
+            info.add(new StringBuilder(scan.nextLine()));
+            info.add(new StringBuilder(n));
+            info.add(new StringBuilder(scan.nextLine()));
+        }
+
+    }
 }
