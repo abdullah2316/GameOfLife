@@ -87,7 +87,15 @@ public class DB_Filing {
             info.add(new StringBuilder(n));
             info.add(new StringBuilder(scan.nextLine()));
         }
-
-
+    }
+    
+       public  void deletestate(String id)  {
+        File myObj = new File(id);
+        if (myObj.delete()) {
+            System.out.println("Deleted the file: " + myObj.getName());
+            FileList.remove(id);
+        } else {
+            System.out.println("Failed to delete the file.");
+        }
     }
 }
