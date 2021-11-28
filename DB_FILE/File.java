@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.io.FileReader;
 import static java.lang.String.valueOf;
+import java.time.LocalDateTime;
+import static java.lang.String.valueOf;
 
 //public class DB_Filing  implements DBduties{  //u would use this// and then also use @override
 public class DB_Filing {
@@ -28,28 +30,31 @@ public class DB_Filing {
     }
 
     //@Override
-    public void save_into_file(ArrayList<Integer> array) throws SQLException {
-        int len =  array.size();
-        try {
-            File myObj = new File("document.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-
-                FileWriter objmyWriter = new FileWriter("document.txt");
-                //objmyWriter.write(getcount(size));  //writes the no. of saves
+   public void save_into_file(String Name, int Generation, ArrayList<Integer> array) throws SQLException {
+        {
+            int len =  array.size() - 1;
+            try {
+                File myObj = new File("document.txt");
+                FileWriter objmyWriter = new FileWriter("document.txt", true);
+                objmyWriter.write(Name);
+                objmyWriter.write("\n");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                objmyWriter.write(dtf.format(now));
+                objmyWriter.write("\n");
+                objmyWriter.write(valueOf(Generation));
+                objmyWriter.write("\n");
                 for (int i =0; i< len;i++){
-                    //objmyWriter.write(valueOf(array.get(i)) + valueOf(array.get(i+1)));
-                    objmyWriter.write(array.get(i) + array.get(i+1));
-                    System.out.println("\r\n");
-                }
-                objmyWriter.close();
+                        objmyWriter.write(valueOf(array.get(i)));
+                        objmyWriter.write(valueOf(array.get(i+1)));
+                        objmyWriter.write("\n");
+                    }
+                    objmyWriter.write("\n");
 
-            } else {
-                System.out.println("File already exists.");
+                objmyWriter.close();
+                } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
 }
