@@ -1,65 +1,63 @@
-package com.company;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.FileReader;
-import static java.lang.String.valueOf;
+import java.util.Date;
+import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import static java.lang.String.valueOf;
 
-//public class DB_Filing  implements DBduties{  //u would use this// and then also use @override
 public class DB_Filing {
-   // @Override
-    public int[] load_from_file(int Save, String document ) throws SQLException, IOException {
-        int array[]=new int[1000];
-
-        FileReader fr=new FileReader("D:\\document.txt");
-        int i;
-        while((i=fr.read())!=-1) {
-            //System.out.print((char) i);
-            array[i]=(char)i;
-            array[i+1]=(char)i;
-        }
-        fr.close();
-
-        return new int[0];
-        //return array;
+    private String filename;
+    private Integer filecounter;
+    private ArrayList<String> FileList;
+    DB_Filing()
+    {
+        filename = new String("State");
+        filecounter = 1;
+        FileList = new ArrayList<String>();
     }
 
     //@Override
-   public void save_into_file(String Name, int Generation, ArrayList<Integer> array) throws SQLException {
+    public void save_into_file(String Name, int Generation, ArrayList<Integer> array) throws SQLException {
         {
+            String n = new String(filename + filecounter.toString() + ".txt");
+            FileList.add(n);
             int len =  array.size() - 1;
             try {
-                File myObj = new File("document.txt");
-                FileWriter objmyWriter = new FileWriter("document.txt", true);
+                File myObj = new File(n);
+                FileWriter objmyWriter = new FileWriter(n);
+                objmyWriter.write(valueOf(array.size()/2));
+                objmyWriter.write("\n");
+                for (int i = 0; i < len ; i++)
+                {
+                    objmyWriter.write(valueOf(array.get(i)));
+                    objmyWriter.write(valueOf(array.get(i+1)));
+                    objmyWriter.write("\n");
+                    i++;
+                }
                 objmyWriter.write(Name);
                 objmyWriter.write("\n");
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                LocalDateTime now = LocalDateTime.now();
-                objmyWriter.write(dtf.format(now));
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                java.util.Date date = new Date();
+                String datetime = formatter.format(date);
+                String datetoday = datetime.substring(0, datetime.indexOf(' '));
+                String time = datetime.substring(datetime.indexOf(' ') + 1);
+                objmyWriter.write(datetoday);
+                objmyWriter.write("\n");
+                objmyWriter.write(time);
                 objmyWriter.write("\n");
                 objmyWriter.write(valueOf(Generation));
                 objmyWriter.write("\n");
-                for (int i =0; i< len;i++){
-                        objmyWriter.write(valueOf(array.get(i)));
-                        objmyWriter.write(valueOf(array.get(i+1)));
-                        objmyWriter.write("\n");
-                    }
-                    objmyWriter.write("\n");
-
                 objmyWriter.close();
+                filecounter++;
                 } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 }
-
-// public class DB_Filing implements DB_interface{
-//
-// }
-
