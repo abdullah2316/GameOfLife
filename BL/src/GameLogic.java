@@ -40,14 +40,15 @@ public class GameLogic implements GameUI {
     public void DeleteState(int Save){
 
     }
-    
+
     public ArrayList<Integer> updateBoard() {
         ArrayList<Integer> arr = new ArrayList<Integer>();
-        GameBoard temp = new GameBoard(Board.getSize());
+        GameBoard temp = new GameBoard(Board.getRowSize(), Board.getColSize());
         temp.copy(Board);
-        int size = Board.getSize();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        int row = Board.getRowSize();
+        int col = Board.getColSize();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 int Neighbor_Count = Board.check_neighbor(i, j);
 
                 if ((Neighbor_Count == 3) && !Board.isAlive(i, j)) {
