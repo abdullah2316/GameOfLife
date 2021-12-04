@@ -98,4 +98,21 @@ public class DB_Filing {
             System.out.println("Failed to delete the file.");
         }
     }
+    
+     ArrayList<Integer> LoadState(String id) throws SQLException, FileNotFoundException {
+        ArrayList<Integer> load = new ArrayList<>();
+        String n = id;
+        File myFile = new File(n);
+        int size = 0;
+        Scanner scan = new Scanner(myFile);
+        size = Integer.parseInt(scan.nextLine());
+        for (int i = 0; i < size; i++)
+        {
+            Integer number = scan.nextInt();
+            load.add(number);
+            number = scan.nextInt();
+            load.add(number);
+        }
+        return load;
+    }
 }
