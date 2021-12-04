@@ -36,5 +36,6 @@ public class Main {
         Fil.Load(info, cells);
         Fil.deletestate("State2.txt");
         Fil.save("ggggg", 8, Arr2);
+        Fil.LoadState("State1.txt");
     }
 }
