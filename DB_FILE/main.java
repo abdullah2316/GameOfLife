@@ -33,5 +33,6 @@ public class Main {
         Fil.save_into_file("Abdullah", 5, Arr2);
         Fil.deletestate("State2.txt");
         Fil.save("ggggg", 8, Arr2);
+        Fil.LoadState("State1.txt");
     }
 }
