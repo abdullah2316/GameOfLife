@@ -2,8 +2,8 @@ package com.console;
 
 import java.util.*;
 
-public class Main {
-	   public static class color {
+   public class Main {
+      public static class color {
          public static final String RESET = "\033[0m";  // Text Reset
 
          // Regular Colors
@@ -77,7 +77,54 @@ public class Main {
          public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
       }
 
-    public static void main(String[] args) {
-	// write your code here
-    }
-}
+      public static int menu()
+      {
+         Scanner sc = new Scanner(System.in);
+         System.out.println(color.RED_BOLD_BRIGHT+ "*****WELCOME TO GAME OF LIFE*****\n" + color.RESET);
+         System.out.println(color.CYAN_BOLD_BRIGHT+"1. START\n"+"2. STOP\n"+"3. NEXT\n"+"4. SPEED CONTROL\n"+"5. SAVE STATE\n"+
+                 "6. LOAD STATE\n"+"7. VIEW SAVED STATES\n"+"8. EXIT\n"+color.RESET);
+         System.out.println(color.PURPLE_BOLD_BRIGHT+"->"+color.RESET);
+
+         return sc.nextInt();
+      }
+
+      public static void main(String[] args) {
+         Scanner sc = new Scanner(System.in);
+         int opt = -1;
+         color color=new color();
+
+         while(opt!=8)
+         {
+            opt=menu();
+
+            if(opt==1)
+            {
+               // start function
+            }
+            else if(opt==2)
+            {
+               // stop function
+            }
+            else if(opt==3)
+            {
+               // next function
+            }
+            else if(opt==4)
+            {
+               // speed control function
+            }
+            else if(opt==5)
+            {
+               // save state function
+            }
+            else if(opt==6)
+            {
+               // load state function
+            }
+            else if(opt==7)
+            {
+               // view saved states function
+            }
+         }
+      }
+   }
