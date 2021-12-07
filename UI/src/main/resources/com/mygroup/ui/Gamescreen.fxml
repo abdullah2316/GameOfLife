@@ -19,10 +19,13 @@
 
     <HBox fx:id="bottombox" alignment="CENTER" spacing="40">
         <Button fx:id="back_btn" onMouseClicked="#back" styleClass="gamebuttons" text="back" textAlignment="CENTER"/>
-        <Button fx:id="next" styleClass="gamebuttons" text="Next" textAlignment="CENTER"/>
+        <Button fx:id="reset" styleClass="gamebuttons" text="Reset" textAlignment="CENTER" onMouseClicked="#reset"/>
+        <Button fx:id="save" styleClass="gamebuttons" text="Save" textAlignment="CENTER" onMouseClicked="#saveState"/>
         <Button fx:id="start" styleClass="gamebuttons" text="Start" textAlignment="CENTER" onMouseClicked="#start"/>
-        <Button fx:id="reset" styleClass="gamebuttons" text="Reset" textAlignment="CENTER"/>
-        <Button fx:id="clear" styleClass="gamebuttons" text="Clear" textAlignment="CENTER"/>
+        <Button fx:id="clear" styleClass="gamebuttons" text="Clear" textAlignment="CENTER" onMouseClicked="#clear"/>
+        <Button fx:id="next" styleClass="gamebuttons" text="Next" textAlignment="CENTER" onMouseClicked="#next"/>
+        <Label fx:id="gen" styleClass="Generation" text="Generation:" textAlignment="CENTER"/>
+        <Label fx:id="generation" styleClass="Generation" text="0" textAlignment="CENTER"/>
         <padding>
             <Insets top="20.0"/>
         </padding>

@@ -1,11 +1,11 @@
-import java.io.File;
+package DB_FILE;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.lang.reflect.Array;
 
 public class Main {
-    public static void main (String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws SQLException, IOException {
         ArrayList<Integer> Arr = new ArrayList<Integer>();
         ArrayList<Integer> Arr2 = new ArrayList<Integer>();
         Arr.add(2);

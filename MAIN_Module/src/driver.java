@@ -1,6 +1,5 @@
 public class driver {
 
-    public DBdutiesImpl dbobj = new DBdutiesImpl();
 
     public static void main(String[] args) {
         System.out.println("Hello world");
@@ -10,11 +9,18 @@ public class driver {
         //dbobj.connect();
         //String output= dbobj.load();
         //System.out.println(output+" from main");
-        //Application.launch(MainMenu.class, args);
+        // Application.launch(MainMenu.class,args);
+        //MainMenu obj = new MainMenu();
     }
-//    public String getDBobj()
+
+    public static void test() {
+        System.out.println("working...");
+    }
+
+    //    public String getDBobj()
 //    {
 //        return dbobj.load();
 //    }
 
 }
+

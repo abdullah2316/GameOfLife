@@ -1,5 +1,6 @@
 package com.mygroup.ui;
 
+import Main.driver;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -73,12 +74,15 @@ public class MainMenuController {
 
     public void switch_to_savedStates(MouseEvent e) throws Exception {
         if (Objects.equals(((Control) e.getSource()).getId(), "View_States"))
-            Connector.data = 'v';
+            Connector.flag1 = 'v';
         else if (Objects.equals(((Control) e.getSource()).getId(), "load_state"))
-            Connector.data = 'l';
+            Connector.flag1 = 'l';
         else
-            Connector.data = 'd';
-
+            Connector.flag1 = 'd';
+        Connector temp = new Connector();
+        driver.init();
+        driver.getBLD().Load(Connector.state_info, Connector.currentAlive);
+        //driver.getDB().Load(Connector.state_info, Connector.currentAlive);
         System.out.println(((Control) e.getSource()).getId());
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();

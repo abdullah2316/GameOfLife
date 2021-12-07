@@ -1,19 +1,25 @@
-import java.io.*;
+package DB_FILE;
+
+import BL.DBduties;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
+
 import static java.lang.String.valueOf;
 
-public class DB_Filing {
+public class DB_Filing implements DBduties {
     private String filename;
     private Integer filecounter;
     private ArrayList<String> FileList;
-    DB_Filing()
-    {
+
+    public DB_Filing() {
         filename = new String("State");
         filecounter = 1;
         FileList = new ArrayList<String>();
@@ -22,19 +28,18 @@ public class DB_Filing {
     //@Override
     public void save(String Name, int Generation, ArrayList<Integer> array) throws SQLException {
         {
-            String n = new String(filename + filecounter.toString() + ".txt");
+            String n = filename + filecounter.toString() + ".txt";
             FileList.add(n);
-            int len =  array.size() - 1;
+            int len = array.size() - 1;
             try {
                 File myObj = new File(n);
                 FileWriter objmyWriter = new FileWriter(n);
-                objmyWriter.write(valueOf(array.size()/2));
+                objmyWriter.write(valueOf(array.size() / 2));
                 objmyWriter.write("\n");
-                for (int i = 0; i < len ; i++)
-                {
+                for (int i = 0; i < len; i++) {
                     objmyWriter.write(valueOf(array.get(i)));
                     objmyWriter.write(" ");
-                    objmyWriter.write(valueOf(array.get(i+1)));
+                    objmyWriter.write(valueOf(array.get(i + 1)));
                     objmyWriter.write("\n");
                     i++;
                 }
@@ -53,46 +58,43 @@ public class DB_Filing {
                 objmyWriter.write("\n");
                 objmyWriter.close();
                 filecounter++;
-                } catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public  void Load(ArrayList<StringBuilder> info, ArrayList<Integer> cells) throws FileNotFoundException {
+    public void Load(ArrayList<StringBuilder> info, ArrayList<Integer> cells) throws FileNotFoundException {
         int total_states = FileList.size();
         cells.add(total_states);
-        String n = new String();
-        for (int i = 0; i < FileList.size(); i++)
-        {
-            n = FileList.get(i);
-            File myFile = new File (n);
+        String n;
+        for (String s : FileList) {
+            n = s;
+            File myFile = new File(n);
             Scanner scan = new Scanner(myFile);
-            Integer iterations = Integer.parseInt(scan.nextLine());
+            int iterations = Integer.parseInt(scan.nextLine());
             cells.add(iterations);
             int j = 0;
-            while (j < iterations)
-            {
-                Integer number = scan.nextInt();
-                //Integer col = number % 10;
-               // number = number / 10;
-               // Integer row = number;
+            while (j < iterations) {
+                int number = scan.nextInt();
                 cells.add(number);
                 number = scan.nextInt();
                 cells.add(number);
                 j++;
             }
+            scan.nextLine();
             info.add(new StringBuilder(scan.nextLine()));
             info.add(new StringBuilder(scan.nextLine()));
             info.add(new StringBuilder(scan.nextLine()));
-            info.add(new StringBuilder(n));
             info.add(new StringBuilder(scan.nextLine()));
+            info.add(new StringBuilder(n));//id
             scan.close();
         }
 
 
     }
-    public  void deletestate(String id)  {
+
+    public void deletestate(String id) {
         File myObj = new File(id);
         if (myObj.delete()) {
             System.out.println("Deleted the file: " + myObj.getName());
@@ -101,19 +103,15 @@ public class DB_Filing {
             System.out.println("Failed to delete the file.");
         }
     }
-     ArrayList<Integer> LoadState(String id) throws SQLException, FileNotFoundException {
+
+    public ArrayList<Integer> LoadState(String id) throws SQLException, FileNotFoundException {
         ArrayList<Integer> load = new ArrayList<>();
-        String n = id;
-        File myFile = new File(n);
+        File myFile = new File(id);
         int size = 0;
         Scanner scan = new Scanner(myFile);
         size = Integer.parseInt(scan.nextLine());
-        for (int i = 0; i < size; i++)
-        {
-            Integer number = scan.nextInt();
-            //Integer col = number % 10;
-            // number = number / 10;
-            // Integer row = number;
+        for (int i = 0; i < size; i++) {
+            int number = scan.nextInt();
             load.add(number);
             number = scan.nextInt();
             load.add(number);
