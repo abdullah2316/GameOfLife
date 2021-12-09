@@ -19,14 +19,14 @@ public class DataHandler implements Data {
         driver.getDB().deletestate(id);
     }
 
-    @Override
-    public void save(String Name) throws SQLException, ClassNotFoundException {
-        driver.getDB().save(Name, GameLogic.get_Generation(), GameLogic.get_Board().get_Alive());
+
+    public void save(String Name, int Generation, ArrayList<Integer> array) throws SQLException, ClassNotFoundException {
+        driver.getDB().save(Name, Generation, array);
     }
 
-    @Override
-    public void Load_A_State(String id) throws SQLException, ClassNotFoundException, FileNotFoundException {
-        GameLogic.set_Board(driver.getDB().LoadState(id));
+
+    public ArrayList<Integer> Load_A_State(String id) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return driver.getDB().LoadState(id);
     }
 
 }

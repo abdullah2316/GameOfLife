@@ -9,11 +9,10 @@ public class GameBoard {
     int Size;
     private Cell[][] Cells;
 
-    public GameBoard() {
-        Row_Size = 40;
-        Col_Size = 100;
+    public GameBoard(int r, int c) {
+        Row_Size = r;
+        Col_Size = c;
         Cells = new Cell[Row_Size][Col_Size];
-        Size = 10;
         for (int i = 0; i < Row_Size; i++) {
             for (int j = 0; j < Col_Size; j++) {
                 Cells[i][j] = new Cell();
@@ -21,9 +20,9 @@ public class GameBoard {
         }
     }
 
-    public GameBoard(ArrayList<Integer> cells) {
-        Row_Size = 40;
-        Col_Size = 100;
+    public GameBoard(ArrayList<Integer> cells, int r, int c) {
+        Row_Size = r;
+        Col_Size = c;
         Cells = new Cell[Row_Size][Col_Size];
         for (int i = 0; i < Row_Size; i++) {
             for (int j = 0; j < Col_Size; j++) {
@@ -31,9 +30,11 @@ public class GameBoard {
 
             }
         }
+        System.out.println("Inn....");
         for (int i = 0; i < cells.size(); i += 2) {
-            Cells[cells.get(i)][cells.get(i + 1)].ChangeState();
+            Cells[cells.get(i) % Row_Size][cells.get(i + 1) % Col_Size].ChangeState();
         }
+        System.out.println("out.........");
     }
 
 
@@ -75,22 +76,44 @@ public class GameBoard {
 
     //fixed pre-built initial pattern
     public ArrayList<Integer> Pattern() {
-        Cells[20][51].ChangeState();
-        Cells[21][51].ChangeState();
-        Cells[22][51].ChangeState();
-        Cells[21][52].ChangeState();
-        Cells[21][50].ChangeState();
         ArrayList<Integer> array = new ArrayList<>();
-        array.add(20);
-        array.add(51);
-        array.add(21);
-        array.add(51);
-        array.add(22);
-        array.add(51);
-        array.add(21);
-        array.add(52);
-        array.add(21);
-        array.add(50);
+        if (Row_Size == 40) {
+            Cells[20][51].ChangeState();
+            Cells[21][51].ChangeState();
+            Cells[22][51].ChangeState();
+            Cells[21][52].ChangeState();
+            Cells[21][50].ChangeState();
+
+            array.add(20);
+            array.add(51);
+            array.add(21);
+            array.add(51);
+            array.add(22);
+            array.add(51);
+            array.add(21);
+            array.add(52);
+            array.add(21);
+            array.add(50);
+
+        } else {
+            Cells[3][5].ChangeState();
+            Cells[3][6].ChangeState();
+            Cells[4][7].ChangeState();
+            Cells[5][8].ChangeState();
+            Cells[6][6].ChangeState();
+
+            array.add(3);
+            array.add(5);
+            array.add(3);
+            array.add(6);
+            array.add(4);
+            array.add(7);
+            array.add(5);
+            array.add(8);
+            array.add(6);
+            array.add(6);
+
+        }
         return array;
     }
 

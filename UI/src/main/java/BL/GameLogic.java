@@ -1,33 +1,47 @@
 package BL;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GameLogic implements GameUI {
-    private static GameBoard Board;
-    private static int Generation;
+    private GameBoard Board;
+    private int Generation;
+    private int r;
+    private int c;
 
-    public GameLogic() {
-
+    public GameLogic(int ro, int co, DBduties d) {
+        r = ro;
+        c = co;
     }
 
-    public static int get_Generation() {
-        return Generation;
+
+    public ArrayList<Integer> get_Alive() {
+        return Board.get_Alive();
     }
 
-    public static GameBoard get_Board() {
-        return Board;
-    }
-
-    public static void set_Board(ArrayList<Integer> cells) {
-        Board = new GameBoard(cells);
+    public void set_Board(ArrayList<Integer> cells) {
+        Board = new GameBoard(cells, r, c);
 
     }
 
     //construct board with initial pattern
     public ArrayList<Integer> ConstructBoard() {
-        Board = new GameBoard();
+        Board = new GameBoard(r, c);
         Generation = 1;
         return Board.Pattern();
+    }
+
+    @Override
+    public void save(String Name) throws SQLException, ClassNotFoundException {
+        DataHandler dh = new DataHandler();
+        dh.save(Name, Generation, Board.get_Alive());
+    }
+
+    @Override
+    public void Load_A_State(String id) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        DataHandler dh = new DataHandler();
+        set_Board(dh.Load_A_State(id));
     }
 
     public void isClicked(int row, int column) {
@@ -36,7 +50,7 @@ public class GameLogic implements GameUI {
 
     public ArrayList<Integer> updateBoard() {
         ArrayList<Integer> arr = new ArrayList<>();
-        GameBoard temp = new GameBoard();
+        GameBoard temp = new GameBoard(r, c);
         temp.copy(Board);
         int row = Board.getRowSize();
         int col = Board.getColSize();

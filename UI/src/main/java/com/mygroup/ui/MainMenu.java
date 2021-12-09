@@ -1,5 +1,7 @@
 package com.mygroup.ui;
 
+import BL.Data;
+import BL.GameUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -13,7 +15,20 @@ import java.net.URL;
 import java.util.Objects;
 
 public class MainMenu extends Application {
-    public double width;
+    Data datafuncs;
+    GameUI gameFuncs;
+
+    public MainMenu() {
+    }
+
+    public MainMenu(Data d, GameUI G) {
+        datafuncs = d;
+        gameFuncs = G;
+    }
+
+    public void init() {
+        Application.launch(MainMenu.class);
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -34,7 +49,6 @@ public class MainMenu extends Application {
 
         stage.setMaxHeight(primaryScreenBounds.getHeight());
         stage.setMinHeight(primaryScreenBounds.getHeight());
-        width = stage.getMinWidth();
         //setting app icon
         stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("images/icon.png")).toString()));
         stage.show();

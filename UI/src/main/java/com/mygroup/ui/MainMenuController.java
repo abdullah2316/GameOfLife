@@ -57,14 +57,6 @@ public class MainMenuController {
 
     }
 
-    @FXML
-    public void switch_to_SavedStates() throws Exception {
-        MainMenu obj = new MainMenu();
-        Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
-        Scene scene = stageTheLayoutBelongs.getScene();
-        obj.change_scene(stageTheLayoutBelongs, scene, "SavedStates.fxml", true, "SavedStates.css");
-    }
-
     public void switch_to_gamescreen() throws Exception {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();

@@ -114,7 +114,7 @@ public class StatesController {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                driver.getBLD().Load_A_State(button.getId());
+                                driver.getBL().Load_A_State(button.getId());
                             } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
                                 e.printStackTrace();
                             }

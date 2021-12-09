@@ -1,13 +1,11 @@
 package com.mygroup.ui;
 
 
-import BL.test;
 import Main.driver;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
@@ -50,19 +48,13 @@ public class GameScreenController {
     @FXML
     private Button next;
     @FXML
-    private HBox speedZoom;
-    @FXML
     private Pane grid_internal;
-    @FXML
-    private BorderPane grid_ext;
     @FXML
     private ScrollPane scroller;
     @FXML
     private Slider zoombar;
     @FXML
     private Button start;
-    @FXML
-    private HBox bottombox;
     @FXML
     private Pane header;
     @FXML
@@ -77,8 +69,7 @@ public class GameScreenController {
     private ImageView zoom_img;
     @FXML
     private ImageView speed_img;
-    private int centeral_row;
-    private int centeral_column;
+
     private Rectangle[][] Rectangles;
 
     public void initialize() {
@@ -92,9 +83,7 @@ public class GameScreenController {
         System.out.println(primaryScreenBounds.getWidth());
         //setting up grid
         //logical width of pane i.e scrollable
-        double logical_width = CalcLogicalwidth(total_columns);
         //logical height of pane i.e scrollable
-        double logical_height = CalcLogicalHeight(total_rows);
         double Y_coordinate = 0;
         for (int row_index = 0; row_index < total_rows; row_index = (int) Math.round(Y_coordinate / square_size)) {
             double X_coordinate = 0;
@@ -102,21 +91,18 @@ public class GameScreenController {
                 Rectangle r = new Rectangle(X_coordinate, Y_coordinate, square_size, square_size);
                 r.setFill(Color.valueOf("#b0c4de"));
                 r.setStroke(Color.valueOf("#1e90ff"));
-                r.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent t) {
-                        if (r.getFill() != Color.BLUE)
-                            r.setFill(Color.BLUE);
-                        else
-                            r.setFill(Color.valueOf("#b0c4de"));
-                        String row = r.getId().substring(0, (r.getId().indexOf('+')));
-                        System.out.println(row + "--");
-                        String col = r.getId().substring((r.getId().indexOf('+') + 1));
-                        System.out.println(col + "--");
-                        driver.getBL().isClicked(Integer.parseInt(row), Integer.parseInt(col));
-                    }
+                r.setOnMouseClicked(t -> {
+                    if (r.getFill() != Color.BLUE)
+                        r.setFill(Color.BLUE);
+                    else
+                        r.setFill(Color.valueOf("#b0c4de"));
+                    String row = r.getId().substring(0, (r.getId().indexOf('+')));
+                    System.out.println(row + "--");
+                    String col = r.getId().substring((r.getId().indexOf('+') + 1));
+                    System.out.println(col + "--");
+                    driver.getBL().isClicked(Integer.parseInt(row), Integer.parseInt(col));
                 });
-                r.setId(String.valueOf(row_index) + "+" + String.valueOf(col_index));
+                r.setId(row_index + "+" + col_index);
                 System.out.println(r.getId() + "--");
                 Rectangles[row_index][col_index] = r;
                 X_coordinate += square_size;
@@ -213,7 +199,6 @@ public class GameScreenController {
     @FXML
     private void back() throws Exception {
         timer.stop();
-        test.reset();
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();
@@ -237,17 +222,6 @@ public class GameScreenController {
 
     }
 
-    public void Reset_Grid() {
-    }
-
-    private double CalcLogicalwidth(int columns) {
-        return square_size * columns;
-    }
-
-    private double CalcLogicalHeight(int rows) {
-        return square_size * rows;
-    }
-
     private void setIconToButton(Button button, String path) {
         Image image = new Image(Objects.requireNonNull(this.getClass().getResource(path)).toString());
         ImageView image_view = new ImageView(image);
@@ -263,7 +237,7 @@ public class GameScreenController {
         image_view.setPreserveRatio(true);
     }
 
-    public void start(MouseEvent mouseEvent) throws InterruptedException {
+    public void start(MouseEvent mouseEvent) {
         Button b = (Button) mouseEvent.getSource();
         if (Objects.equals(b.getText(), "Start")) {
             b.setText("Stop");
@@ -278,11 +252,22 @@ public class GameScreenController {
 
     }
 
-    public void next(MouseEvent mouseEvent) {
-
+    public void next() {
+        boolean flag = false;
+        if (timer.getStatus() == Animation.Status.RUNNING) {
+            flag = true;
+            timer.pause();
+        }
+        ArrayList<Integer> cells = driver.getBL().updateBoard();
+        update_cells(cells);
+        int count = Integer.parseInt(generation.getText());
+        count++;
+        generation.setText(String.valueOf(count));
+        if (flag)
+            timer.play();
     }
 
-    public void reset(MouseEvent mouseEvent) {
+    public void reset() {
         clear();
         ArrayList<Integer> cells = driver.getBL().Reset();
         for (int i = 0; i < cells.size(); i += 2) {
@@ -311,7 +296,7 @@ public class GameScreenController {
         pause();
     }
 
-    public void saveState(MouseEvent mouseEvent) {
+    public void saveState() {
         boolean flag = false;
         if (timer.getStatus() == Animation.Status.RUNNING) {
             flag = true;
@@ -326,7 +311,7 @@ public class GameScreenController {
             System.out.println("state name: " + s);
             //bl_obj.save(s);
             try {
-                driver.getBLD().save(s);
+                driver.getBL().save(s);
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -335,11 +320,4 @@ public class GameScreenController {
             timer.play();
     }
 
-    private void invert(Rectangle r) {
-        if (r.getFill().equals(Color.BLUE)) {
-            r.setFill(Color.valueOf("#b0c4de"));
-        } else
-            r.setFill(Color.BLUE);
-
-    }
 }
