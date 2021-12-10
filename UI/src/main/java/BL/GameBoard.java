@@ -6,7 +6,6 @@ public class GameBoard {
 
     int Row_Size;
     int Col_Size;
-    int Size;
     private Cell[][] Cells;
 
     public GameBoard(int r, int c) {
@@ -30,11 +29,10 @@ public class GameBoard {
 
             }
         }
-        System.out.println("Inn....");
+
         for (int i = 0; i < cells.size(); i += 2) {
             Cells[cells.get(i) % Row_Size][cells.get(i + 1) % Col_Size].ChangeState();
         }
-        System.out.println("out.........");
     }
 
 
@@ -53,7 +51,6 @@ public class GameBoard {
 
     public void isClicked(int row, int column) {
         Cells[row][column].ChangeState();
-        System.out.println("row: " + row + " col: " + column);
     }
 
     public boolean isAlive(int row, int column) {
@@ -61,7 +58,7 @@ public class GameBoard {
     }
 
     public ArrayList<Integer> ClearBoard() {
-        ArrayList<Integer> array = new ArrayList<Integer>();
+        ArrayList<Integer> array = new ArrayList<>();
         for (int i = 0; i < Row_Size; i++) {
             for (int j = 0; j < Col_Size; j++) {
                 if (Cells[i][j].check_IsAlive()) {
@@ -117,15 +114,6 @@ public class GameBoard {
         return array;
     }
 
-    public ArrayList<Integer> ResetBoard() {
-        ClearBoard();
-        return Pattern();
-    }
-
-    public boolean getCell(int row, int column) {
-        return Cells[row][column].check_IsAlive();
-    }
-
     public int getRowSize() {
         return Row_Size;
     }
@@ -154,33 +142,6 @@ public class GameBoard {
                 Cells[i][j].setAlive(obj.Cells[i][j].check_IsAlive());
             }
         }
-    }
-
-    public void copyfromArray(int[] array) {
-        int index = 1;
-        for (int i = 0; i < Row_Size; i++) {
-            for (int j = 0; j < Col_Size; j++) {
-                if (index < array[0]) {
-                    if (array[index] == i && array[index + 1] == j) {
-                        Cells[i][j].setAlive(true);
-                        index += 2;
-                    } else
-                        Cells[i][j].setAlive(false);
-                } else
-                    Cells[i][j].setAlive(false);
-            }
-        }
-    }
-
-    public ArrayList<Integer> copyToArray() {
-        ArrayList<Integer> array = new ArrayList<Integer>();
-        for (int i = 0; i < Row_Size; i++)
-            for (int j = 0; j < Col_Size; j++)
-                if (Cells[i][j].check_IsAlive()) {
-                    array.add(i);
-                    array.add(j);
-                }
-        return array;
     }
 
 

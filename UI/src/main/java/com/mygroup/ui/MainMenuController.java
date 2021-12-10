@@ -1,6 +1,5 @@
 package com.mygroup.ui;
 
-import Main.driver;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,14 +17,21 @@ import java.util.Objects;
 
 public class MainMenuController {
     @FXML
-    public Button new_state;
-    public Button load_state;
-    public Button exit;
-    public VBox layout;
-    public ImageView img;
-    public Button View_States;
-    public Button Delete_state;
-    public VBox menu;
+    private Button new_state;
+    @FXML
+    private Button load_state;
+    @FXML
+    private Button exit;
+    @FXML
+    private VBox layout;
+    @FXML
+    private ImageView img;
+    @FXML
+    private Button View_States;
+    @FXML
+    private Button Delete_state;
+    @FXML
+    private VBox menu;
 
     @FXML
     public void initialize() {
@@ -57,14 +63,16 @@ public class MainMenuController {
 
     }
 
-    public void switch_to_gamescreen() throws Exception {
+    @FXML
+    private void switch_to_gamescreen() throws Exception {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();
         obj.change_scene(stageTheLayoutBelongs, scene, "Gamescreen.fxml", true, "GameScreen.css");
     }
 
-    public void switch_to_savedStates(MouseEvent e) throws Exception {
+    @FXML
+    private void switch_to_savedStates(MouseEvent e) throws Exception {
         if (Objects.equals(((Control) e.getSource()).getId(), "View_States"))
             Connector.flag1 = 'v';
         else if (Objects.equals(((Control) e.getSource()).getId(), "load_state"))
@@ -72,9 +80,8 @@ public class MainMenuController {
         else
             Connector.flag1 = 'd';
         Connector temp = new Connector();
-        driver.init();
-        driver.getBLD().Load(Connector.state_info, Connector.currentAlive);
-        //driver.getDB().Load(Connector.state_info, Connector.currentAlive);
+
+        MainMenu.get_BLD().Load(Connector.state_info, Connector.currentAlive);
         System.out.println(((Control) e.getSource()).getId());
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();

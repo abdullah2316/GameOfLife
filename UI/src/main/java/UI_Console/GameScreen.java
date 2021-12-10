@@ -1,7 +1,5 @@
 package UI_Console;
 
-import Main.driver;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,7 +8,7 @@ import java.util.Scanner;
 import static java.lang.Thread.sleep;
 
 public class GameScreen {
-    private static int speed = 9000;
+    private static int speed = 900;
 
     private static void clearScreen() throws InterruptedException {
         System.out.println(System.lineSeparator().repeat(100));
@@ -68,8 +66,8 @@ public class GameScreen {
     //set the manually drawn pattern on Board
     private static void setChoiceonBoard(ArrayList<Integer> cells) {
         for (int i = 0; i < cells.size(); i += 2) {
-            driver.getBL().isClicked(cells.get(i), cells.get(i + 1));
-            //System.out.println(cells.get(i) + "  " + cells.get(i + 1));
+            mainmenu.get_BL().isClicked(cells.get(i), cells.get(i + 1));
+
         }
     }
 
@@ -96,7 +94,7 @@ public class GameScreen {
         System.out.println("Enter speed from 1 to 10");
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int newspeed = myObj.nextInt();
-        speed = 9000 + newspeed;
+        speed = 900 + newspeed;
     }
 
     public static void init(int mode) throws InterruptedException, SQLException, ClassNotFoundException {
@@ -106,15 +104,15 @@ public class GameScreen {
             Scanner myObj = new Scanner(System.in);  // Create a Scanner object
             String choice = myObj.nextLine();
             if (Objects.equals(choice, "2")) {
-                printinitialBoard(driver.getBL().ConstructBoard());
+                printinitialBoard(mainmenu.get_BL().ConstructBoard());
             } else if (Objects.equals(choice, "1")) {
-                driver.getBL().ConstructBoard();
-                driver.getBL().Clear();
+                mainmenu.get_BL().ConstructBoard();
+                mainmenu.get_BL().Clear();
                 Draw();
             }
 
         } else {
-            printBoard(driver.getBL().start());
+            printBoard(mainmenu.get_BL().start());
 
         }
         boolean flag = true;
@@ -124,9 +122,7 @@ public class GameScreen {
                 case "1":
                     System.out.println("How many Iterations you want to run?");
                     Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-                    System.out.println("here");
                     iterations = myObj.nextInt();
-                    System.out.println("there");
                     break;
                 case "3":
                     iterations = 0;
@@ -137,7 +133,7 @@ public class GameScreen {
                     System.out.println("Enter State Name:");
                     Scanner nameobj = new Scanner(System.in);  // Create a Scanner object
                     String name = nameobj.nextLine();
-                    driver.getBL().save(name);
+                    mainmenu.get_BL().save(name);
                 case "4":
                     iterations = 0;
                     setspeed();
@@ -148,8 +144,8 @@ public class GameScreen {
 
             for (int i = 0; i < iterations; i++) {
                 sleep(1000);
-                driver.getBL().updateBoard();
-                ArrayList<Integer> cells = driver.getBL().get_Alive();
+                mainmenu.get_BL().updateBoard();
+                ArrayList<Integer> cells = mainmenu.get_BL().get_Alive();
                 printBoard(cells);
             }
         }

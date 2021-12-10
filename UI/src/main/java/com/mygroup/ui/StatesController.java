@@ -1,6 +1,5 @@
 package com.mygroup.ui;
 
-import Main.driver;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -114,7 +113,7 @@ public class StatesController {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                driver.getBL().Load_A_State(button.getId());
+                                MainMenu.get_BL().Load_A_State(button.getId());
                             } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
                                 e.printStackTrace();
                             }
@@ -140,7 +139,7 @@ public class StatesController {
                             main.getChildren().remove(individual_container);
                             String id = button.getId();
                             try {
-                                driver.getBLD().deletestate(id);
+                                MainMenu.get_BLD().deletestate(id);
                             } catch (SQLException | ClassNotFoundException e) {
                                 e.printStackTrace();
                             }

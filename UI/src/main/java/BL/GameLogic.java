@@ -5,17 +5,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GameLogic implements GameUI {
+    private static DBduties DB;
+    private final int r;
+    private final int c;
     private GameBoard Board;
     private int Generation;
-    private int r;
-    private int c;
 
     public GameLogic(int ro, int co, DBduties d) {
         r = ro;
         c = co;
+        DB = d;
     }
 
-
+    public static DBduties getDB() {
+        return DB;
+    }
+    
     public ArrayList<Integer> get_Alive() {
         return Board.get_Alive();
     }

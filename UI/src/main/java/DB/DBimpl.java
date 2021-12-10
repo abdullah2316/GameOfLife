@@ -36,11 +36,10 @@ public class DBimpl implements DBduties {
         //Declare statement, resultSet and CachedResultSet as null
         Statement stmt = null;
         ResultSet resultSet = null;
-        CachedRowSet crs = null;
+        CachedRowSet crs;
         try {
             //Connect to DB (Establish Oracle Connection)
             connect();
-            System.out.println("Select statement: " + queryStmt + "\n");
             //Create statement
             stmt = conn.createStatement();
             //Execute select (query) operation
@@ -158,17 +157,16 @@ public class DBimpl implements DBduties {
                 id = rsEmp.getInt("ID");
                 //your logic...
             }
-            System.out.println("id " + id);
+
             for (int i = 0; i < cells.size(); i += 2) {
                 String updateStmt2 =
-                        "INSERT INTO States_Info (ID,row_c,col_c) VALUES ( " + id + ",'" + String.valueOf(cells.get(i)) + "' , '" + cells.get(i + 1) + "' " + ")";
+                        "INSERT INTO States_Info (ID,row_c,col_c) VALUES ( " + id + ",'" + cells.get(i) + "' , '" + cells.get(i + 1) + "' " + ")";
                 //Execute DELETE operation
                 try {
                     dbExecuteUpdate(updateStmt2);
 
                 } catch (SQLException e) {
                     System.out.print("Error occurred while INSERT Operation: " + e);
-                    System.out.println(updateStmt2);
                     throw e;
                 }
             }

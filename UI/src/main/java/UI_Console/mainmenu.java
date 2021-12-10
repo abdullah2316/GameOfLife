@@ -9,12 +9,20 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class mainmenu {
-    Data datafuncs;
-    GameUI gameFuncs;
+    private static Data datafuncs;
+    private static GameUI gameFuncs;
 
     public mainmenu(Data d, GameUI g) {
         datafuncs = d;
         gameFuncs = g;
+    }
+
+    public static Data get_BLD() {
+        return datafuncs;
+    }
+
+    public static GameUI get_BL() {
+        return gameFuncs;
     }
 
     public String show() {

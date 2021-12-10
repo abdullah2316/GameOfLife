@@ -1,7 +1,5 @@
 package UI_Console;
 
-import Main.driver;
-
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class SavedStates {
     public void init() throws SQLException, FileNotFoundException, ClassNotFoundException {
         ArrayList<Integer> cells = new ArrayList<>();
         ArrayList<StringBuilder> info = new ArrayList<>();
-        driver.getBLD().Load(info, cells);
+        mainmenu.get_BLD().Load(info, cells);
         System.out.println("herereer");
         for (int i = 0; i < (info.size() / 5); i++) {
             System.out.println(String.valueOf(i + 1) + "-" + (info.get(i * 5)));
@@ -38,10 +36,10 @@ public class SavedStates {
             String choice = myObj.nextLine();
             if (Objects.equals(choice, "2"))//delete state
             {
-                driver.getBLD().deletestate(statesID.get(Integer.parseInt(choice) - 1));
+                mainmenu.get_BLD().deletestate(statesID.get(Integer.parseInt(choice) - 1));
             } else if (Objects.equals(choice, "1"))//Load State
             {
-                driver.getBL().Load_A_State(statesID.get(Integer.parseInt(choice) - 1));
+                mainmenu.get_BL().Load_A_State(statesID.get(Integer.parseInt(choice) - 1));
             }
         }
     }

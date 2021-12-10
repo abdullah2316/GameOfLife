@@ -1,7 +1,6 @@
 package com.mygroup.ui;
 
 
-import Main.driver;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -80,7 +79,6 @@ public class GameScreenController {
         image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
         img.setImage(image_header);
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        System.out.println(primaryScreenBounds.getWidth());
         //setting up grid
         //logical width of pane i.e scrollable
         //logical height of pane i.e scrollable
@@ -97,13 +95,10 @@ public class GameScreenController {
                     else
                         r.setFill(Color.valueOf("#b0c4de"));
                     String row = r.getId().substring(0, (r.getId().indexOf('+')));
-                    System.out.println(row + "--");
                     String col = r.getId().substring((r.getId().indexOf('+') + 1));
-                    System.out.println(col + "--");
-                    driver.getBL().isClicked(Integer.parseInt(row), Integer.parseInt(col));
+                    MainMenu.get_BL().isClicked(Integer.parseInt(row), Integer.parseInt(col));
                 });
                 r.setId(row_index + "+" + col_index);
-                System.out.println(r.getId() + "--");
                 Rectangles[row_index][col_index] = r;
                 X_coordinate += square_size;
             }
@@ -158,11 +153,10 @@ public class GameScreenController {
                 ))));
         // setting update time
         timer = set_timer(speedBar);
-        driver.init();
         if (Connector.flag1 != 'l')
-            fill_cells(driver.getBL().ConstructBoard());
+            fill_cells(MainMenu.get_BL().ConstructBoard());
         else
-            fill_cells(driver.getBL().start());
+            fill_cells(MainMenu.get_BL().start());
 
     }
 
@@ -181,7 +175,7 @@ public class GameScreenController {
     private Timeline set_timer(Slider slider) {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            ArrayList<Integer> cells = driver.getBL().updateBoard();
+            ArrayList<Integer> cells = MainMenu.get_BL().updateBoard();
             update_cells(cells);
             int count = Integer.parseInt(generation.getText());
             count++;
@@ -258,7 +252,7 @@ public class GameScreenController {
             flag = true;
             timer.pause();
         }
-        ArrayList<Integer> cells = driver.getBL().updateBoard();
+        ArrayList<Integer> cells = MainMenu.get_BL().updateBoard();
         update_cells(cells);
         int count = Integer.parseInt(generation.getText());
         count++;
@@ -269,7 +263,7 @@ public class GameScreenController {
 
     public void reset() {
         clear();
-        ArrayList<Integer> cells = driver.getBL().Reset();
+        ArrayList<Integer> cells = MainMenu.get_BL().Reset();
         for (int i = 0; i < cells.size(); i += 2) {
             Rectangles[cells.get(i)][cells.get(i + 1)].setFill(Color.BLUE);
         }
@@ -289,7 +283,7 @@ public class GameScreenController {
     }
 
     public void clear() {
-        ArrayList<Integer> cells = driver.getBL().Clear();
+        ArrayList<Integer> cells = MainMenu.get_BL().Clear();
         for (int i = 0; i < cells.size(); i += 2) {
             Rectangles[cells.get(i)][cells.get(i + 1)].setFill(Color.valueOf("#b0c4de"));
         }
@@ -308,10 +302,9 @@ public class GameScreenController {
         dialog.setContentText("Please enter State name:");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(s -> {
-            System.out.println("state name: " + s);
-            //bl_obj.save(s);
+
             try {
-                driver.getBL().save(s);
+                MainMenu.get_BL().save(s);
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

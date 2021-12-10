@@ -15,8 +15,8 @@ import java.net.URL;
 import java.util.Objects;
 
 public class MainMenu extends Application {
-    Data datafuncs;
-    GameUI gameFuncs;
+    private static Data datafuncs;
+    private static GameUI gameFuncs;
 
     public MainMenu() {
     }
@@ -26,8 +26,16 @@ public class MainMenu extends Application {
         gameFuncs = G;
     }
 
-    public void init() {
-        Application.launch(MainMenu.class);
+    public static Data get_BLD() {
+        return datafuncs;
+    }
+
+    public static GameUI get_BL() {
+        return gameFuncs;
+    }
+
+    public void init(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -38,8 +46,6 @@ public class MainMenu extends Application {
         stage.setTitle("GAME OF LIFE");
         stage.setScene(scene);
         //maximizing stage
-//      stage.setMaximized(true);
-//        stage.setResizable(false);
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX(primaryScreenBounds.getMinX());
         stage.setY(primaryScreenBounds.getMinY());
@@ -75,5 +81,4 @@ public class MainMenu extends Application {
         }
         stage.setScene(scene);
     }
-
 }
