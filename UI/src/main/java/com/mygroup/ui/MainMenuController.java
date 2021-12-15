@@ -1,5 +1,6 @@
 package com.mygroup.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -95,5 +96,9 @@ public class MainMenuController {
         image_view.setFitHeight(25);
         image_view.setPreserveRatio(true);
         button.setGraphic(image_view);
+    }
+
+    public void exit() {
+        Platform.exit();
     }
 }

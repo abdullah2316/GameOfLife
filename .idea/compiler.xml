@@ -6,11 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="UI" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="UI" target="13" />
+      <module name="Game_Of_Life" target="13" />
+      <module name="GameOfLife" target="13" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="GameOfLife" options="--add-exports java.sql.rowset/com.sun.rowset=com.mygroup.ui" />
+    </option>
   </component>
 </project>
