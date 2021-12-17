@@ -39,7 +39,7 @@ public class SavedStates {
                 mainmenu.get_BLD().deletestate(statesID.get(Integer.parseInt(choice) - 1));
             } else if (Objects.equals(choice, "1"))//Load State
             {
-                mainmenu.get_BL().Load_A_State(statesID.get(Integer.parseInt(choice) - 1));
+                mainmenu.get_BL().Load_A_State(statesID.get(Integer.parseInt(choice) - 1), 20, 20);
             }
         }
     }

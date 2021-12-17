@@ -29,11 +29,11 @@ public class driver {
             Dt = new DB_Filing();
         System.out.println("Choose Front End:\n1-GUI\n2-Console");
         if (Objects.equals(myObj.next(), "1")) {
-            BL = new GameLogic(40, 100, Dt);
+            BL = new GameLogic(Dt);
             MainMenu m = new MainMenu(DH, BL);//GUI
             m.init(args);
         } else {
-            BL = new GameLogic(20, 20, Dt);
+            BL = new GameLogic(Dt);
             mainmenu obj = new mainmenu(DH, BL);
             obj.start();
         }

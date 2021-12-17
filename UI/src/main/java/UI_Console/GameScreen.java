@@ -104,9 +104,9 @@ public class GameScreen {
             Scanner myObj = new Scanner(System.in);  // Create a Scanner object
             String choice = myObj.nextLine();
             if (Objects.equals(choice, "2")) {
-                printinitialBoard(mainmenu.get_BL().ConstructBoard());
+                printinitialBoard(mainmenu.get_BL().ConstructBoard(20, 20));
             } else if (Objects.equals(choice, "1")) {
-                mainmenu.get_BL().ConstructBoard();
+                mainmenu.get_BL().ConstructBoard(20, 20);
                 mainmenu.get_BL().Clear();
                 Draw();
             }

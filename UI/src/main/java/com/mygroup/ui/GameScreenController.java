@@ -154,7 +154,7 @@ public class GameScreenController {
         // setting update time
         timer = set_timer(speedBar);
         if (Connector.flag1 != 'l')
-            fill_cells(MainMenu.get_BL().ConstructBoard());
+            fill_cells(MainMenu.get_BL().ConstructBoard(40, 100));
         else
             fill_cells(MainMenu.get_BL().start());
 

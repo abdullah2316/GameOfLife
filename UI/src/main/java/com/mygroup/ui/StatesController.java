@@ -113,7 +113,7 @@ public class StatesController {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                MainMenu.get_BL().Load_A_State(button.getId());
+                                MainMenu.get_BL().Load_A_State(button.getId(), 40, 100);
                             } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
                                 e.printStackTrace();
                             }

@@ -22,13 +22,13 @@ public interface GameUI {
     ArrayList<Integer> Reset();//ok
 
     //reload the initially
-    ArrayList<Integer> ConstructBoard();
+    ArrayList<Integer> ConstructBoard(int rwo, int col);
 
     //
     public void save(String Name) throws SQLException, ClassNotFoundException;
 
     //
-    public void Load_A_State(String id) throws SQLException, ClassNotFoundException, FileNotFoundException;
+    public void Load_A_State(String id, int row, int col) throws SQLException, ClassNotFoundException, FileNotFoundException;
 
     //
     ArrayList<Integer> start();

@@ -6,21 +6,20 @@ import java.util.ArrayList;
 
 public class GameLogic implements GameUI {
     private static DBduties DB;
-    private final int r;
-    private final int c;
+    private int r;
+    private int c;
     private GameBoard Board;
     private int Generation;
 
-    public GameLogic(int ro, int co, DBduties d) {
-        r = ro;
-        c = co;
+    public GameLogic(DBduties d) {
+
         DB = d;
     }
 
     public static DBduties getDB() {
         return DB;
     }
-    
+
     public ArrayList<Integer> get_Alive() {
         return Board.get_Alive();
     }
@@ -31,7 +30,9 @@ public class GameLogic implements GameUI {
     }
 
     //construct board with initial pattern
-    public ArrayList<Integer> ConstructBoard() {
+    public ArrayList<Integer> ConstructBoard(int row, int col) {
+        r = row;
+        c = col;
         Board = new GameBoard(r, c);
         Generation = 1;
         return Board.Pattern();
@@ -44,7 +45,9 @@ public class GameLogic implements GameUI {
     }
 
     @Override
-    public void Load_A_State(String id) throws SQLException, ClassNotFoundException, FileNotFoundException {
+    public void Load_A_State(String id, int row, int col) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        r = row;
+        c = col;
         DataHandler dh = new DataHandler();
         set_Board(dh.Load_A_State(id));
     }
