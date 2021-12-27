@@ -1,0 +1,5 @@
+Phase 3 - Deployment Level Independence Implementation
+jar file for each module is added , you can compile any ui aur db with driver and run it
+command used for compiling throuogh cmd (windows 10) : javac -d Build -cp ./jars/UI.jar;./jars/BL.jar;./jars/DB.jar driver.java
+for running : java -cp ./Build;./jars/UI.jar;./jars/BL.jar;./jars/DB.jar driver
+Rename any ui jar (GUI or CLI) to ui.jar and compile with the driver to run it, same is the case with Database jars
