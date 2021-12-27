@@ -36,7 +36,7 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
-        Connector temp = new Connector();
+        Helper temp = new Helper();
         //setting header image
         Image image_header;
         image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
@@ -75,15 +75,17 @@ public class MainMenuController {
     @FXML
     private void switch_to_savedStates(MouseEvent e) throws Exception {
         if (Objects.equals(((Control) e.getSource()).getId(), "View_States"))
-            Connector.flag1 = 'v';
+            Helper.flag1 = 'v';
         else if (Objects.equals(((Control) e.getSource()).getId(), "load_state"))
-            Connector.flag1 = 'l';
+            Helper.flag1 = 'l';
         else
-            Connector.flag1 = 'd';
-        Connector temp = new Connector();
-
-        MainMenu.get_BLD().Load(Connector.state_info, Connector.currentAlive);
-        System.out.println(((Control) e.getSource()).getId());
+            Helper.flag1 = 'd';
+        Helper temp = new Helper();
+        
+        MainMenu.get_BLD().Load();
+        Helper.state_info = Helper.Arguments_to_SB("output1");
+        Helper.currentAlive = Helper.Arguments_to_AL("output2");
+        // System.out.println(((Control) e.getSource()).getId());
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) layout.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();

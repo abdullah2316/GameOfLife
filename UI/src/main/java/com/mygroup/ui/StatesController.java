@@ -1,6 +1,5 @@
 package com.mygroup.ui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -21,21 +19,21 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Objects;
 
-import static com.mygroup.ui.Connector.currentAlive;
+import static com.mygroup.ui.Helper.currentAlive;
 
 public class StatesController {
     @FXML
     public VBox main;
     public ScrollPane main_spane;
     public ImageView header;
-    public Pane board;
+    //public Pane board;
     public VBox main_container;
     public Button back_btn;
 
     @FXML
     public void initialize() {
         //setting header
-        char flag = Connector.flag1;
+        char flag = Helper.flag1;
         System.out.println(flag);
         Image image_header = new Image(Objects.requireNonNull(this.getClass().getResource("images/header.png")).toString());
         header.setImage(image_header);
@@ -69,7 +67,7 @@ public class StatesController {
 
             Label h1 = new Label();
             h1.getStyleClass().add("textlabelmain");
-            h1.setText(String.valueOf(Connector.state_info.get(i * 5)));
+            h1.setText(String.valueOf(Helper.state_info.get(i * 5)));
             heading1.getChildren().add(h1);
 
             individual_container.getChildren().add(heading1);
@@ -84,14 +82,14 @@ public class StatesController {
 
             Label h2 = new Label();
             h2.getStyleClass().add("textlabels");
-            h2.setText("date Saved: " + Connector.state_info.get((i * 5) + 1));
+            h2.setText("date Saved: " + Helper.state_info.get((i * 5) + 1));
 
             Label h3 = new Label();
             h3.getStyleClass().add("textlabels");
-            h3.setText("Time Saved: " + Connector.state_info.get((i * 5) + 2));
+            h3.setText("Time Saved: " + Helper.state_info.get((i * 5) + 2));
             Label h4 = new Label();
             h4.getStyleClass().add("textlabels");
-            h4.setText("Generation: " + Connector.state_info.get((i * 5) + 3));
+            h4.setText("Generation: " + Helper.state_info.get((i * 5) + 3));
             detailsContainer.getChildren().add(h2);
             detailsContainer.getChildren().add(h3);
             detailsContainer.getChildren().add(h4);
@@ -104,45 +102,43 @@ public class StatesController {
 
                 Button button = new Button();
                 button.getStyleClass().add("statebutton");
-                button.setId(String.valueOf(Connector.state_info.get((i * 5) + 4)));
+                button.setId(String.valueOf(Helper.state_info.get((i * 5) + 4)));
                 // button.setId(String.valueOf(count));
                 if (flag == 'l') {
                     button.setText("LOAD");
                     setIconToButton(button, "images/cloud.png");
-                    button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            try {
-                                MainMenu.get_BL().Load_A_State(button.getId(), 40, 100);
-                            } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            MainMenu obj = new MainMenu();
-                            Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
-                            Scene scene = stageTheLayoutBelongs.getScene();
-                            try {
-                                obj.change_scene(stageTheLayoutBelongs, scene, "Gamescreen.fxml", true, "GameScreen.css");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                    button.setOnMouseClicked(mouseEvent -> {
+                        try {
+                            Helper.write_argument(40, "input1");
+                            Helper.write_argument(100, "input2");
+                            Helper.write_argument(button.getId(), "input3");
+                            MainMenu.get_BL().Load_A_State();
+                        } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        MainMenu obj = new MainMenu();
+                        Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
+                        Scene scene = stageTheLayoutBelongs.getScene();
+                        try {
+                            obj.change_scene(stageTheLayoutBelongs, scene, "Gamescreen.fxml", true, "GameScreen.css");
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     });
                 } else if (flag == 'd') {
                     button.setText("Delete");
                     setIconToButton(button, "images/delete.png");
-                    button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            individual_container.getChildren().clear();
-                            individual_container.setVisible(false);
-                            individual_container.setManaged(false);
-                            main.getChildren().remove(individual_container);
-                            String id = button.getId();
-                            try {
-                                MainMenu.get_BLD().deletestate(id);
-                            } catch (SQLException | ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
+                    button.setOnMouseClicked(mouseEvent -> {
+                        individual_container.getChildren().clear();
+                        individual_container.setVisible(false);
+                        individual_container.setManaged(false);
+                        main.getChildren().remove(individual_container);
+                        String id = button.getId();
+                        try {
+                            Helper.write_argument(id, "input1");
+                            MainMenu.get_BLD().deletestate();
+                        } catch (SQLException | ClassNotFoundException e) {
+                            e.printStackTrace();
                         }
                     });
                 }
@@ -169,7 +165,7 @@ public class StatesController {
         final double width = 800;//actual width of pane on screen
         final int columsOnScreen = 60;//at zoom=1
         final double square_size = width / columsOnScreen;
-        final int rowsOnScreen = 30;//at zoom=1
+        //at zoom=1
         int Total_columns = 60;//total columns
         int Total_rows = (int) (height / square_size);
         Rectangle[][] Rectangles = new Rectangle[Total_rows][Total_columns];
@@ -190,9 +186,10 @@ public class StatesController {
         int i;
 
         for (i = count + 1; i < (currentAlive.get(count) * 2) + (count + 1); i += 2) {
-            System.out.println(currentAlive.get(i) + " " + currentAlive.get(i + 1));
+            //System.out.println(currentAlive.get(i) + " " + currentAlive.get(i + 1));
             if (currentAlive.get(i) <= 27 && currentAlive.get(i + 1) >= 13)
-                Rectangles[currentAlive.get(i) - 13][currentAlive.get(i + 1) - 20].setFill(Color.BLUE);
+                Rectangles[currentAlive.get(i) % 13][currentAlive.get(i + 1) % 20].setFill(Color.BLUE);
+            // System.out.println("yoyo");
         }
         return i;
     }
@@ -205,7 +202,7 @@ public class StatesController {
         button.setGraphic(image_view);
     }
 
-    public void back(MouseEvent mouseEvent) throws Exception {
+    public void back() throws Exception {
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();

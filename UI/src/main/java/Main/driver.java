@@ -6,35 +6,54 @@ import BL.GameLogic;
 import DB.DBimpl;
 import DB_FILE.DB_Filing;
 import UI_Console.mainmenu;
+import com.google.gson.Gson;
 import com.mygroup.ui.MainMenu;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class driver {
 
-    private static GameLogic BL;
-    private static DataHandler DH;
-    private static DBduties Dt;
-
     public static void main(String[] args) throws SQLException, FileNotFoundException, InterruptedException, ClassNotFoundException {
-        System.out.println("Choose Storage:\n1-SQL Server\n2-File");
+
         Scanner myObj = new Scanner(System.in);
-        DH = new DataHandler();
+        DataHandler DH = new DataHandler();
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\DH.json")) {
+            gson.toJson(DH, writer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Choose Storage:\n1-SQL Server\n2-File");
+        DBduties dt;
         if (Objects.equals(myObj.next(), "1")) {
-            Dt = new DBimpl();
+            dt = new DBimpl();
         } else
-            Dt = new DB_Filing();
+            dt = new DB_Filing();
+
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\DB.json")) {
+            gson.toJson(dt, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GameLogic BL;
+        BL = new GameLogic();
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\BL.json")) {
+            gson.toJson(BL, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Choose Front End:\n1-GUI\n2-Console");
         if (Objects.equals(myObj.next(), "1")) {
-            BL = new GameLogic(Dt);
-            MainMenu m = new MainMenu(DH, BL);//GUI
+            MainMenu m = new MainMenu();//GUI
             m.init(args);
         } else {
-            BL = new GameLogic(Dt);
-            mainmenu obj = new mainmenu(DH, BL);
+            mainmenu obj = new mainmenu();
             obj.start();
         }
 

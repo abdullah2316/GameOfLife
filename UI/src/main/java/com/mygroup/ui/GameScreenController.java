@@ -96,7 +96,9 @@ public class GameScreenController {
                         r.setFill(Color.valueOf("#b0c4de"));
                     String row = r.getId().substring(0, (r.getId().indexOf('+')));
                     String col = r.getId().substring((r.getId().indexOf('+') + 1));
-                    MainMenu.get_BL().isClicked(Integer.parseInt(row), Integer.parseInt(col));
+                    Helper.write_argument(Integer.parseInt(row), "input1");
+                    Helper.write_argument(Integer.parseInt(col), "input2");
+                    MainMenu.get_BL().isClicked();
                 });
                 r.setId(row_index + "+" + col_index);
                 Rectangles[row_index][col_index] = r;
@@ -153,10 +155,15 @@ public class GameScreenController {
                 ))));
         // setting update time
         timer = set_timer(speedBar);
-        if (Connector.flag1 != 'l')
-            fill_cells(MainMenu.get_BL().ConstructBoard(40, 100));
-        else
-            fill_cells(MainMenu.get_BL().start());
+        if (Helper.flag1 != 'l') {
+            Helper.write_argument(40, "input1");
+            Helper.write_argument(100, "input2");
+            MainMenu.get_BL().ConstructBoard();
+            fill_cells(Helper.O_to_Int());
+        } else {
+            MainMenu.get_BL().start();
+            fill_cells(Helper.O_to_Int());
+        }
 
     }
 
@@ -175,7 +182,8 @@ public class GameScreenController {
     private Timeline set_timer(Slider slider) {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            ArrayList<Integer> cells = MainMenu.get_BL().updateBoard();
+            MainMenu.get_BL().updateBoard();
+            ArrayList<Integer> cells = Helper.O_to_Int();
             update_cells(cells);
             int count = Integer.parseInt(generation.getText());
             count++;
@@ -193,6 +201,7 @@ public class GameScreenController {
     @FXML
     private void back() throws Exception {
         timer.stop();
+        reset();
         MainMenu obj = new MainMenu();
         Stage stageTheLayoutBelongs = (Stage) header.getScene().getWindow();
         Scene scene = stageTheLayoutBelongs.getScene();
@@ -252,7 +261,8 @@ public class GameScreenController {
             flag = true;
             timer.pause();
         }
-        ArrayList<Integer> cells = MainMenu.get_BL().updateBoard();
+        MainMenu.get_BL().updateBoard();
+        ArrayList<Integer> cells = Helper.O_to_Int();
         update_cells(cells);
         int count = Integer.parseInt(generation.getText());
         count++;
@@ -263,7 +273,8 @@ public class GameScreenController {
 
     public void reset() {
         clear();
-        ArrayList<Integer> cells = MainMenu.get_BL().Reset();
+        MainMenu.get_BL().Reset();
+        ArrayList<Integer> cells = Helper.O_to_Int();
         for (int i = 0; i < cells.size(); i += 2) {
             Rectangles[cells.get(i)][cells.get(i + 1)].setFill(Color.BLUE);
         }
@@ -283,7 +294,8 @@ public class GameScreenController {
     }
 
     public void clear() {
-        ArrayList<Integer> cells = MainMenu.get_BL().Clear();
+        MainMenu.get_BL().Clear();
+        ArrayList<Integer> cells = Helper.O_to_Int();
         for (int i = 0; i < cells.size(); i += 2) {
             Rectangles[cells.get(i)][cells.get(i + 1)].setFill(Color.valueOf("#b0c4de"));
         }
@@ -304,7 +316,8 @@ public class GameScreenController {
         result.ifPresent(s -> {
 
             try {
-                MainMenu.get_BL().save(s);
+                Helper.write_argument(s, "input1");
+                MainMenu.get_BL().save();
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

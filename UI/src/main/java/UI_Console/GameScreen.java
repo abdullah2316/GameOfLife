@@ -66,7 +66,9 @@ public class GameScreen {
     //set the manually drawn pattern on Board
     private static void setChoiceonBoard(ArrayList<Integer> cells) {
         for (int i = 0; i < cells.size(); i += 2) {
-            mainmenu.get_BL().isClicked(cells.get(i), cells.get(i + 1));
+            Helper.write_argument(cells.get(i), "input1");
+            Helper.write_argument(cells.get(i + 1), "input1");
+            mainmenu.get_BL().isClicked();
 
         }
     }
@@ -104,16 +106,21 @@ public class GameScreen {
             Scanner myObj = new Scanner(System.in);  // Create a Scanner object
             String choice = myObj.nextLine();
             if (Objects.equals(choice, "2")) {
-                printinitialBoard(mainmenu.get_BL().ConstructBoard(20, 20));
+                com.mygroup.ui.Helper.write_argument(20, "input1");
+                com.mygroup.ui.Helper.write_argument(20, "input2");
+                mainmenu.get_BL().ConstructBoard();
+                printinitialBoard(Helper.O_to_Int());
             } else if (Objects.equals(choice, "1")) {
-                mainmenu.get_BL().ConstructBoard(20, 20);
+                com.mygroup.ui.Helper.write_argument(20, "input1");
+                com.mygroup.ui.Helper.write_argument(20, "input2");
+                mainmenu.get_BL().ConstructBoard();
                 mainmenu.get_BL().Clear();
                 Draw();
             }
 
         } else {
-            printBoard(mainmenu.get_BL().start());
-
+            mainmenu.get_BL().start();
+            printBoard(UI_Console.Helper.O_to_Int());
         }
         boolean flag = true;
         int iterations = 0;
@@ -133,7 +140,8 @@ public class GameScreen {
                     System.out.println("Enter State Name:");
                     Scanner nameobj = new Scanner(System.in);  // Create a Scanner object
                     String name = nameobj.nextLine();
-                    mainmenu.get_BL().save(name);
+                    Helper.write_argument(name, "input1");
+                    mainmenu.get_BL().save();
                 case "4":
                     iterations = 0;
                     setspeed();
@@ -145,7 +153,8 @@ public class GameScreen {
             for (int i = 0; i < iterations; i++) {
                 sleep(1000);
                 mainmenu.get_BL().updateBoard();
-                ArrayList<Integer> cells = mainmenu.get_BL().get_Alive();
+                mainmenu.get_BL().get_Alive();
+                ArrayList<Integer> cells = Helper.O_to_Int();
                 printBoard(cells);
             }
         }

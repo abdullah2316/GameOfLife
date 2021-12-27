@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="UI" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Game_Of_Life" target="13" />
       <module name="GameOfLife" target="13" />
+      <module name="UI" target="13" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

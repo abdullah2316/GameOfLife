@@ -2,36 +2,36 @@ package BL;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public interface GameUI {
     //public void save(String Name) throws SQLException, ClassNotFoundException;
 
 
     //takes row and col of new click and returns updated array of changed cells
-    void isClicked(int row, int col);
+    void isClicked();
 
     // save State in DB
 
     //simple update called after certain interval of time
-    ArrayList<Integer> updateBoard();//ok
+    void updateBoard();//ok
 
     //clear board and data
-    ArrayList<Integer> Clear();//ok
+    void Clear();//ok
 
-    ArrayList<Integer> Reset();//ok
+    void Reset();//ok
 
     //reload the initially
-    ArrayList<Integer> ConstructBoard(int rwo, int col);
+    void ConstructBoard();
 
     //
-    public void save(String Name) throws SQLException, ClassNotFoundException;
+    void save() throws SQLException, ClassNotFoundException;
 
     //
-    public void Load_A_State(String id, int row, int col) throws SQLException, ClassNotFoundException, FileNotFoundException;
+    void Load_A_State() throws SQLException, ClassNotFoundException, FileNotFoundException;
 
     //
-    ArrayList<Integer> start();
+    void start();
 
-    ArrayList<Integer> get_Alive();
+    //ArrayList<Integer> start();
+    void get_Alive();
 }

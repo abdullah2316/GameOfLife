@@ -1,7 +1,10 @@
 package com.mygroup.ui;
 
 import BL.Data;
+import BL.DataHandler;
+import BL.GameLogic;
 import BL.GameUI;
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -10,20 +13,38 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Objects;
 
 public class MainMenu extends Application {
     private static Data datafuncs;
     private static GameUI gameFuncs;
+    private static int count;
+
 
     public MainMenu() {
-    }
-
-    public MainMenu(Data d, GameUI G) {
-        datafuncs = d;
-        gameFuncs = G;
+        System.out.println("Constructor called");
+        if (count == 0) {
+            Gson gson = new Gson();
+            try (Reader reader = new FileReader("\\AllModules\\DataExchange\\DH.json")) {
+                datafuncs = gson.fromJson(reader, DataHandler.class);
+                reader.close();
+                Helper.deleteFile("\\AllModules\\DataExchange\\DH.json");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try (Reader reader = new FileReader("\\AllModules\\DataExchange\\BL.json")) {
+                gameFuncs = gson.fromJson(reader, GameLogic.class);
+                reader.close();
+                Helper.deleteFile("\\AllModules\\DataExchange\\BL.json");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        count++;
     }
 
     public static Data get_BLD() {

@@ -17,8 +17,11 @@ public class SavedStates {
 
     public void init() throws SQLException, FileNotFoundException, ClassNotFoundException {
         ArrayList<Integer> cells = new ArrayList<>();
-        ArrayList<StringBuilder> info = new ArrayList<>();
-        mainmenu.get_BLD().Load(info, cells);
+        ArrayList<StringBuilder> info;
+
+        mainmenu.get_BLD().Load();
+        info = Helper.Arguments_to_SB("output1");
+        cells = Helper.Arguments_to_AL("output2");
         System.out.println("herereer");
         for (int i = 0; i < (info.size() / 5); i++) {
             System.out.println(String.valueOf(i + 1) + "-" + (info.get(i * 5)));
@@ -36,10 +39,14 @@ public class SavedStates {
             String choice = myObj.nextLine();
             if (Objects.equals(choice, "2"))//delete state
             {
-                mainmenu.get_BLD().deletestate(statesID.get(Integer.parseInt(choice) - 1));
+                Helper.write_argument(statesID.get(Integer.parseInt(choice) - 1), "input1");
+                mainmenu.get_BLD().deletestate();
             } else if (Objects.equals(choice, "1"))//Load State
             {
-                mainmenu.get_BL().Load_A_State(statesID.get(Integer.parseInt(choice) - 1), 20, 20);
+                Helper.write_argument(20, "input1");
+                Helper.write_argument(20, "input2");
+                Helper.write_argument(statesID.get(Integer.parseInt(choice) - 1), "input1");
+                mainmenu.get_BL().Load_A_State();
             }
         }
     }

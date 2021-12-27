@@ -1,6 +1,7 @@
 package DB_FILE;
 
 import BL.DBduties;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,8 +27,11 @@ public class DB_Filing implements DBduties {
     }
 
     //@Override
-    public void save(String Name, int Generation, ArrayList<Integer> array) throws SQLException {
+    public void save() throws SQLException {
         {
+            String Name = DB_FILE.Helper.Arguments_to_string("input1");
+            int Generation = DB_FILE.Helper.Arguments_to_int("input2");
+            ArrayList<Integer> array = Helper.Arguments_to_AL("input3");
             String n = filename + filecounter.toString() + ".txt";
             FileList.add(n);
             int len = array.size() - 1;
@@ -64,7 +68,9 @@ public class DB_Filing implements DBduties {
         }
     }
 
-    public void Load(ArrayList<StringBuilder> info, ArrayList<Integer> cells) throws FileNotFoundException {
+    public void Load() throws FileNotFoundException {
+        ArrayList<StringBuilder> info = new ArrayList<>();
+        ArrayList<Integer> cells = new ArrayList<>();
         int total_states = FileList.size();
         cells.add(total_states);
         String n;
@@ -91,10 +97,21 @@ public class DB_Filing implements DBduties {
             scan.close();
         }
 
-
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\output1.json")) {
+            gson.toJson(info, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\output2.json")) {
+            gson.toJson(cells, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void deletestate(String id) {
+    public void deletestate() {
+        String id = DB.Helper.Arguments_to_string("input1");
         File myObj = new File(id);
         if (myObj.delete()) {
             System.out.println("Deleted the file: " + myObj.getName());
@@ -104,7 +121,8 @@ public class DB_Filing implements DBduties {
         }
     }
 
-    public ArrayList<Integer> LoadState(String id) throws SQLException, FileNotFoundException {
+    public void LoadState() throws SQLException, FileNotFoundException {
+        String id = Helper.Arguments_to_string("input3");
         ArrayList<Integer> load = new ArrayList<>();
         File myFile = new File(id);
         int size = 0;
@@ -116,7 +134,12 @@ public class DB_Filing implements DBduties {
             number = scan.nextInt();
             load.add(number);
         }
-        return load;
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("\\AllModules\\DataExchange\\output.json")) {
+            gson.toJson(load, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

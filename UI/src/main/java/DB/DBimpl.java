@@ -92,8 +92,8 @@ public class DBimpl implements DBduties {
         }
     }
 
-    public void deletestate(String identity) throws SQLException, ClassNotFoundException {
-
+    public void deletestate() throws SQLException, ClassNotFoundException {
+        String identity = Helper.Arguments_to_string("input1");
         int id = Integer.parseInt(identity);
         String updateStmt =
                 "BEGIN\n" +
@@ -119,7 +119,8 @@ public class DBimpl implements DBduties {
     }
 
     @Override
-    public ArrayList<Integer> LoadState(String id) throws SQLException, ClassNotFoundException {
+    public void LoadState() throws SQLException, ClassNotFoundException {
+        String id = Helper.Arguments_to_string("input3");
         ArrayList<Integer> cells = new ArrayList<>();
         String selectStmt = "select * from States_info WHERE ID = " + id + "";
         ResultSet cellscoordinates = dbExecuteQuery(selectStmt);
@@ -127,11 +128,15 @@ public class DBimpl implements DBduties {
             cells.add(cellscoordinates.getInt("row_c"));
             cells.add(cellscoordinates.getInt("col_c"));
         }
-        return cells;
+        Helper.write_argument(cells, "output");
+
     }
 
 
-    public void save(String Name, int generation, ArrayList<Integer> cells) throws SQLException, ClassNotFoundException {
+    public void save() throws SQLException, ClassNotFoundException {
+        String Name = Helper.Arguments_to_string("input1");
+        int generation = Helper.Arguments_to_int("input2");
+        ArrayList<Integer> cells = Helper.Arguments_to_AL("input3");
         //Declare a DELETE statement
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         java.util.Date date = new Date();
@@ -179,8 +184,10 @@ public class DBimpl implements DBduties {
 
     }
 
-    public void Load(ArrayList<StringBuilder> info, ArrayList<Integer> cells) throws SQLException, ClassNotFoundException {
+    public void Load() throws SQLException, ClassNotFoundException {
 
+        ArrayList<StringBuilder> info = new ArrayList<>();
+        ArrayList<Integer> cells = new ArrayList<>();
         String selectStmt = "select * from States  ";
         //Execute SELECT statement
         try {
@@ -216,6 +223,8 @@ public class DBimpl implements DBduties {
             //Return exception
             throw e;
         }
+        Helper.write_argument(info, "output1");
+        Helper.write_argument(cells, "output2");
     }
 
 }
